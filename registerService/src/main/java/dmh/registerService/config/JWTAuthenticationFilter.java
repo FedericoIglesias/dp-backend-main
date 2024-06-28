@@ -1,0 +1,67 @@
+package dmh.registerService.config;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dmh.registerService.model.Users;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.naming.AuthenticationException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    private AuthenticationManager authenticationManager;
+
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+
+        setFilterProcessesUrl("/api/login");
+    }
+
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest req,
+                                                HttpServletResponse res) {
+        try{
+            Users creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), Users.class);
+
+            return  AuthenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            creds.getName(),
+                            creds.getPassword(),
+                            new ArrayList<>()
+                    )
+            );
+
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @Override
+    protected void successfulAuthentication(HttpServletRequest req,
+                                            HttpServletResponse res,
+                                            FilterChain chain,
+                                            Authentication auth) throws IOException{
+
+        String token = JWT.create()
+                .withSubject(((Users) auth.getPrincipal()).getName())
+                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .sign(Algorithm.HMAC512(SECRET.getBytes()));
+
+        String body = ((Users) auth.getPrincipal()).getName() + " " + token;
+
+        res.getWriter().write(body);
+        res.getWriter().flush();
+    }
+
+
+}
