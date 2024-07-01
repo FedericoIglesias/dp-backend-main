@@ -4,9 +4,10 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dmh.registerService.model.Users;
-import jakarta.servlet.FilterChain;
+import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.catalina.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,12 +18,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static dmh.registerService.config.SecurityConstants.EXPIRATION_TIME;
-import static dmh.registerService.config.SecurityConstants.SECRET;
+import static dmh.registerService.config.SecurityConstants.*;
+
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
+
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -30,16 +32,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         setFilterProcessesUrl("/api/services/controller/user/login");
     }
 
-
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            Users creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), Users.class);
+            User creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), User.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            creds.getName(),
+                            creds.getUsername(),
                             creds.getPassword(),
                             new ArrayList<>())
             );

@@ -32,6 +32,10 @@ public class Users {
     public Users() {
     }
 
+    public Users(String name, String password){
+        this.name = name;
+        this.password = password;
+    }
     public Users(Integer id, String name, String lastName, String dni, String email, Integer phone, String password, BigInteger cvu, String alias) {
         this.id = id;
         this.name = name;
@@ -43,4 +47,5 @@ public class Users {
         this.cvu = cvu;
         this.alias = alias;
     }
+
 }

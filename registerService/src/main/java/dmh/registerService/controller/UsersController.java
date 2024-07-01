@@ -7,6 +7,7 @@ import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -32,11 +33,12 @@ public class UsersController {
     }
 
     @PostMapping
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<Users> saveUser(@RequestBody Users user){
         BigInteger cvu = new Auxiliar().generateCVU();
         user.setCvu(cvu);
         user.setAlias(new Auxiliar().generateAlias());
-       // user.setPassword(new Auxiliar().bCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(new Auxiliar().bCryptPasswordEncoder().encode(user.getPassword()));
         System.out.println(user.getName());
         serviUsers.saveUser(user);
 
