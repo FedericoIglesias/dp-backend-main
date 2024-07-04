@@ -1,4 +1,4 @@
-package dmh.registerService.config;
+package dhm_backend.register_login.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
+public class RegisterRequest {
     String username;
     String password;
+    String firstname;
+    String lastname;
+    String country;
 }

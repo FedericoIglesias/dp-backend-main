@@ -1,6 +1,5 @@
-package dmh.registerService.config;
+package dhm_backend.register_login.jwt;
 
-import ch.qos.logback.core.util.StringUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,8 +11,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.net.http.HttpHeaders;
 
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+
 @Component
-public class JWTAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -23,16 +24,16 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request,response);
             return;
         }
-
         filterChain.doFilter(request,response);
     }
 
-    private String getTokenFromRequest(HttpServletRequest request){
-        final String autHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+    private String getTokenFromRequest(HttpServletRequest request) {
+        final String authHeader=request.getHeader(AUTHORIZATION);
 
-        if(StringUtils.hasText(autHeader) && autHeader.startsWith("Bearer ")){
-            return autHeader.substring(7);
+        if(StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")){
+            return authHeader.substring(7);
         }
-        return null;
+    return null;
     }
 }
+
