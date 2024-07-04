@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/registerService/pom.xml" />
         <option value="$PROJECT_DIR$/register-login/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-jwt-authentication-1.0/pom.xml" />
       </list>
     </option>
   </component>
