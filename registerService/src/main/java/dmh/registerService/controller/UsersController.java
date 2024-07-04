@@ -1,32 +1,44 @@
 package dmh.registerService.controller;
 
-import dmh.registerService.auxiliar.Auxiliar;
-import dmh.registerService.model.Users;
-import dmh.registerService.service.UsersService;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import dmh.registerService.config.AuthResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 @RestController
-@RequestMapping("/users")
+@RequiredArgsConstructor
 public class UsersController {
 
+    @PostMapping("/auth/login")
+    public ResponseEntity<AuthResponse> login(){
+        return  ResponseEntity.ok(new AuthResponse());
+    }
+
+    @PostMapping("/auth/register")
+    public ResponseEntity<AuthResponse> register(){
+        return ResponseEntity.ok(new AuthResponse());
+    }
+
+    @PostMapping("/demo")
+    public String demo(){
+        return "Welcome form  secrure endpoint";
+    }
+
+    /*
     @Autowired
     UsersService serviUsers;
+    @Autowired
+    JWTUtil jwt;
 
     @GetMapping
     public ResponseEntity<List<Users>> getListUsers(){
         return new ResponseEntity<>(serviUsers.getListUsers(),HttpStatus.OK);
     }
 
+    @GetMapping("/:name")
+    public String  getJWT(@PathVariable String name){
+        return  jwt.generateToken(name);
+    }
     @GetMapping("/:id")
     public ResponseEntity<Users>  getUser(@PathVariable Integer id){
         return  new ResponseEntity<>(serviUsers.getUser(id), HttpStatus.OK);
@@ -59,5 +71,5 @@ public class UsersController {
         Users user1 = serviUsers.getUser(user.getId());
         return new ResponseEntity<>(user1,HttpStatus.OK);
     }
-
+ */
 }

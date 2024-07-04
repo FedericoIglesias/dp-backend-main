@@ -1,22 +1,48 @@
 package dmh.registerService.service;
 
+import dmh.registerService.config.AuthResponse;
+import dmh.registerService.config.LoginRequest;
+import dmh.registerService.config.RegisterRequest;
+import dmh.registerService.model.Role;
 import dmh.registerService.model.Users;
 import dmh.registerService.repository.IUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class UsersService implements UserDetailsService, IUsersService{
+public class UsersService implements IUsersService{
+
 
     @Autowired
     IUsersRepository repoUser;
+
+    @Autowired
+    JwtService jwtService;
+
+    @Override
+    public AuthResponse login(LoginRequest request) {
+        return null;
+    }
+
+    @Override
+    public AuthResponse register(RegisterRequest request) {
+        Users user = Users.builder()
+                .name(request.getName())
+                .password(request.getPassword())
+                .dni(request.getDni())
+                .email(request.getEmail())
+                .phone(request.getPhone())
+                .role(Role.USER)
+                .build();
+
+        repoUser.save(user);
+
+        return AuthResponse.builder()
+                .token(jwtService.getToken(user))
+                .build();
+    }
 
     @Override
     public List<Users> getListUsers() {
@@ -43,14 +69,4 @@ public class UsersService implements UserDetailsService, IUsersService{
         repoUser.save(user);
         return repoUser.findById(user.getId()).orElse(null);
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Users user = repoUser.findByUsername(s);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        return (UserDetails) new Users(user.getName(), user.getPassword());
-    }
-    }
+ }

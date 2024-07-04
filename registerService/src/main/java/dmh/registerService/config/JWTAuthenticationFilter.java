@@ -1,67 +1,38 @@
 package dmh.registerService.config;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import dmh.registerService.model.Users;
-import jakarta.servlet.*;
+import ch.qos.logback.core.util.StringUtil;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.catalina.User;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.naming.AuthenticationException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.net.http.HttpHeaders;
 
-import static dmh.registerService.config.SecurityConstants.*;
+@Component
+public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        final String token = getTokenFromRequest(request);
 
-public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
-    private AuthenticationManager authenticationManager;
-
-
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-
-        setFilterProcessesUrl("/api/services/controller/user/login");
-    }
-
-    public Authentication attemptAuthentication(HttpServletRequest req,
-                                                HttpServletResponse res) throws AuthenticationException {
-        try {
-            User creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), User.class);
-
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            creds.getUsername(),
-                            creds.getPassword(),
-                            new ArrayList<>())
-            );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if(token == null){
+            filterChain.doFilter(request,response);
+            return;
         }
+
+        filterChain.doFilter(request,response);
     }
 
+    private String getTokenFromRequest(HttpServletRequest request){
+        final String autHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-    protected void successfulAuthentication(HttpServletRequest req,
-                                            HttpServletResponse res,
-                                            FilterChain chain,
-                                            Authentication auth) throws IOException {
-        String token = JWT.create()
-                .withSubject(((Users) auth.getPrincipal()).getName())
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .sign(Algorithm.HMAC512(SECRET.getBytes()));
-
-        String body = ((Users) auth.getPrincipal()).getName() + " " + token;
-
-        res.getWriter().write(body);
-        res.getWriter().flush();
+        if(StringUtils.hasText(autHeader) && autHeader.startsWith("Bearer ")){
+            return autHeader.substring(7);
+        }
+        return null;
     }
 }
