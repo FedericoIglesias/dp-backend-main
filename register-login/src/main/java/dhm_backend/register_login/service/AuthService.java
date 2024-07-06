@@ -4,7 +4,7 @@ import dhm_backend.register_login.auth.AuthResponse;
 import dhm_backend.register_login.auth.LoginRequest;
 import dhm_backend.register_login.auth.RegisterRequest;
 import dhm_backend.register_login.model.Role;
-import dhm_backend.register_login.model.User;
+import dhm_backend.register_login.model.Users;
 import dhm_backend.register_login.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,12 +22,12 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     public AuthResponse register(RegisterRequest request) {
-        User user = User.builder()
-                .username(request.getUsername())
+        Users user = Users.builder()
+                .username(request.getEmail())
                 .password(passwordEncoder().encode(request.getPassword()))
-                .firstname(request.getFirstname())
+                .name(request.getName())
+                .phone(request.getPhone())
                 .lastname(request.getLastname())
-                .country(request.getCountry())
                 .role(Role.USER)
                 .build();
         repoUser.save(user);
@@ -37,8 +37,8 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest request) {
-    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user = repoUser.findByUsername(request.getUsername()).orElseThrow();
+    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        UserDetails user = repoUser.findByUsername(request.getEmail()).orElseThrow();
         String token= jwtService.getToken(user);
         return AuthResponse.builder()
                 .token(token)

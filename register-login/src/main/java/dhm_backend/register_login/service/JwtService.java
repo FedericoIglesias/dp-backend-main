@@ -1,6 +1,5 @@
 package dhm_backend.register_login.service;
 
-import dhm_backend.register_login.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
