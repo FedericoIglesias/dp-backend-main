@@ -1,13 +1,13 @@
-package dhm.register.model;
+package dhm.login.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.management.relation.Role;
-import java.util.Collection;
 
 @Data
 @Builder
@@ -18,15 +18,13 @@ public class Users {
     @Id
     @GeneratedValue
     Integer id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     String username;//email
     String name;
     String lastname;
     String phone;
     String password;
-    @Column(nullable = false,unique = true)
     String alias;
-    @Column(nullable = false,unique = true)
     String cvu;
     String token;
     //@Enumerated(EnumType.STRING)

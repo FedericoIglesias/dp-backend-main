@@ -6,10 +6,7 @@ import dhm.register.model.Users;
 import dhm.register.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/register")
@@ -18,6 +15,10 @@ public class RegisterController {
     @Autowired
     UsersService serviUser;
 
+    @GetMapping("/status")
+    public ResponseEntity<String> status(){
+        return ResponseEntity.ok("STATUS OK");
+    }
     @PostMapping("/user")
     public ResponseEntity<UsersResponse> register(@RequestBody RequestUsers request){
         Users user = Users.builder()
