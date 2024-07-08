@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class Users implements UserDetails {
     String phone;
     String password;
     String alias;
-    Integer cvu;
+    String cvu;
     @Enumerated(EnumType.STRING)
     Role role;
 
