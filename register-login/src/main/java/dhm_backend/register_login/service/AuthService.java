@@ -81,10 +81,10 @@ public class AuthService {
 
     public UsersRegister getUser(String email) {
         Users users = repoUser.findByUsername(email);
-        if(users == null){
-            return null;
+        UsersRegister regUser = null;
+        if (users == null) {
         }
-        UsersRegister regUser = UsersRegister.builder()
+        regUser = UsersRegister.builder()
                 .email(users.getUsername())
                 .name(users.getName())
                 .lastname(users.getLastname())

@@ -1,24 +1,20 @@
-package dhm_backend.register_login.model;
+package dhm.register.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Collection;
-import java.util.List;
 
-@Builder
+import javax.management.relation.Role;
+import java.util.Collection;
+
 @Data
-@Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="user",uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
-public class Users implements UserDetails {
-
+@Entity
+public class Users {
     @Id
     @GeneratedValue
     Integer id;
@@ -30,13 +26,13 @@ public class Users implements UserDetails {
     String password;
     String alias;
     String cvu;
-    @Enumerated(EnumType.STRING)
-    Role role;
-
-
+    String token;
+    //@Enumerated(EnumType.STRING)
+    //Role role;
+/*
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority((role.name())));
+        return null;
     }
 
     @Override
@@ -47,15 +43,18 @@ public class Users implements UserDetails {
     @Override
     public boolean isAccountNonLocked() {
         return true;
+
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+
     }
 
     @Override
     public boolean isEnabled() {
         return true;
-    }
+
+    }*/
 }
