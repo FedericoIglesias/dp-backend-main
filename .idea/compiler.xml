@@ -12,6 +12,7 @@
         <module name="register-login" />
         <module name="gateway" />
         <module name="register" />
+        <module name="profile" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +20,7 @@
       <module name="gateway" target="17" />
       <module name="login" target="17" />
       <module name="logout" target="17" />
+      <module name="profile" target="17" />
       <module name="register" target="17" />
       <module name="register-login" target="17" />
       <module name="registerService" target="17" />
@@ -30,6 +32,7 @@
       <module name="gateway" options="-parameters" />
       <module name="login" options="-parameters" />
       <module name="logout" options="-parameters" />
+      <module name="profile" options="-parameters" />
       <module name="register" options="-parameters" />
       <module name="register-login" options="-parameters" />
       <module name="registerService" options="-parameters" />
