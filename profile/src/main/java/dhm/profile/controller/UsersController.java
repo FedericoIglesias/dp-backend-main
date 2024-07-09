@@ -9,12 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
 public class UsersController {
 
     @Autowired
     UsersService serviUser;
-
+    @GetMapping("/status")
+    public ResponseEntity<String> status(){
+        return ResponseEntity.ok("STATUS OK");
+    }
     @GetMapping("/users/:id")
     public ResponseEntity<UsersResponse> getUser(@PathVariable Integer id){
         Users user = serviUser.getUser(id);

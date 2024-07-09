@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/profile/profile.iml" filepath="$PROJECT_DIR$/profile/profile.iml" />
       <module fileurl="file://$PROJECT_DIR$/register/register.iml" filepath="$PROJECT_DIR$/register/register.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-login/register-login.iml" filepath="$PROJECT_DIR$/register-login/register-login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/singlesignon/singlesignon.iml" filepath="$PROJECT_DIR$/singlesignon/singlesignon.iml" />
     </modules>
   </component>
 </project>

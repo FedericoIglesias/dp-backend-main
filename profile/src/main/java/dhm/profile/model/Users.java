@@ -32,7 +32,7 @@ public class Users implements UserDetails {
     @Column(nullable = false,unique = true)
     String cvu;
     String token;
-    @OneToMany(mappedBy = "username")
+    @OneToMany(mappedBy = "users")
     List<Cards> listCards;
 
     @Override

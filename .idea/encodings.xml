@@ -14,6 +14,8 @@
     <file url="file://$PROJECT_DIR$/register/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/register/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/registerService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/singlesignon/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/singlesignon/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-boot-jwt-authentication-1.0/src/main/java" charset="UTF-8" />
   </component>
 </project>

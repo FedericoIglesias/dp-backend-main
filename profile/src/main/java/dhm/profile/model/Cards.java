@@ -21,6 +21,6 @@ public class Cards {
     String bank;
     String number;
     @ManyToOne
-    String username;
+    Users users;
 
 }
