@@ -2,6 +2,7 @@ package dhm.profile.service;
 
 import dhm.profile.model.Cards;
 import dhm.profile.repository.ICardsRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,12 @@ import java.util.List;
 public class CardsService {
 
     @Autowired
+    UsersService serviUsers;
+    @Autowired
     ICardsRepository repoCards;
+
+    @Autowired
+    JwtService serviJwt;
 
     public List<Cards> getListCards(Integer idUser) {
      List<Cards> listCards = new ArrayList();
@@ -31,6 +37,18 @@ public class CardsService {
             return null;
         }
         return card;
+
+    }
+
+    public String saveCard(Cards card) {
+        try{
+            repoCards.save(card);
+            return "Success to save the card";
+        } catch(Error e){
+            System.out.println(e);
+            return "Unsuccessful to save the card";
+        }
+
 
     }
 }

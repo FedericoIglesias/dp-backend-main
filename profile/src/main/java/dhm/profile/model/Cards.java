@@ -17,13 +17,13 @@ public class Cards {
     @Id
     @GeneratedValue
     Integer id;
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     String bank;
     @Column(unique = true,nullable = false)
     Integer number;
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     String endDate;
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     Integer cvv;
     @ManyToOne
     @JoinColumn(unique = true,nullable = false)
