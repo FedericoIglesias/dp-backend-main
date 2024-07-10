@@ -13,16 +13,10 @@ import java.util.List;
 public class CardsService {
 
     @Autowired
-    UsersService serviUsers;
-    @Autowired
     ICardsRepository repoCards;
-
-    @Autowired
-    JwtService serviJwt;
 
     public List<Cards> getListCards(Integer idUser) {
      List<Cards> listCards = new ArrayList();
-
         for(Cards card: repoCards.findAll()){
          if(card.getUsers().getId().equals(idUser)){
              listCards.add(card);
@@ -37,7 +31,6 @@ public class CardsService {
             return null;
         }
         return card;
-
     }
 
     public String saveCard(Cards card) {
@@ -48,7 +41,13 @@ public class CardsService {
             System.out.println(e);
             return "Unsuccessful to save the card";
         }
+    }
 
-
+    public Boolean deleteCard(Integer idCard) {
+        if(repoCards.existsById(idCard)){
+            repoCards.deleteById(idCard);
+            return true;
+        }
+            return false;
     }
 }

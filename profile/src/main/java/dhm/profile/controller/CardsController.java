@@ -37,12 +37,23 @@ public class CardsController {
     public ResponseEntity saveCard(@RequestBody Cards card, @PathVariable("idUser") Integer idUser, HttpServletRequest request){
         Boolean check = serviCheckLogin.checkLogin(request, idUser);
         if(!check){
-            return new ResponseEntity<>("Success to create card", HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
+            return new ResponseEntity<>("Unsuccessful to create card", HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
         }
         card.setId(idUser);
         serviCards.saveCard(card);
         return new ResponseEntity<>("Success to create card", HttpStatus.CREATED);
-
     }
 
+    @DeleteMapping("/accounts/{idUser}/cards/{idCard}")
+    public ResponseEntity deleteCard(@PathVariable("idCard") Integer idCard,@PathVariable("idUser") Integer idUser, HttpServletRequest request){
+        Boolean check = serviCheckLogin.checkLogin(request, idUser);
+        if(!check){
+            return new ResponseEntity<>("Unsuccessful to check user", HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
+        }
+        boolean  exist = serviCards.deleteCard(idCard);
+        if(exist){
+            return new ResponseEntity<>("Success to delete card", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Unsuccessful to create card", HttpStatus.CREATED);
+    }
 }
