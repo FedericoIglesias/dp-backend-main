@@ -3,6 +3,9 @@ package dhm.profile.service;
 import dhm.profile.model.Users;
 import dhm.profile.repository.IUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,11 +17,16 @@ public class UsersService {
         return repoUser.findById(id).orElse(null);
     }
 
-    public Users modifyUser(Users user, Integer id) {
-        if(!getUser(id).getUsername().equals(user.getUsername())){
+    public Users modifyUser(Users newUser, Integer id) {
+
+        Users user = getUser(id);
+        if(!user.getUsername().equals(user.getUsername())){
             return null;
-        };
-        repoUser.save(user);
+        }
+        newUser.setId(id);
+        newUser.setPassword(user.getPassword());
+        newUser.setToken(user.getToken());
+        repoUser.save(newUser);
         return getUser(id);
     }
 }
