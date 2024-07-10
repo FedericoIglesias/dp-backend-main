@@ -17,10 +17,9 @@ public class UsersController {
     public ResponseEntity<String> status(){
         return ResponseEntity.ok("STATUS OK");
     }
-    @GetMapping("/users/:id")
-    public ResponseEntity<UsersResponse> getUser(@PathVariable Integer id){
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UsersResponse> getUser(@PathVariable("id") Integer id){
         Users user = serviUser.getUser(id);
-
         if(user == null){
             return null;
         }
@@ -35,6 +34,10 @@ public class UsersController {
                 .build());
     }
 
+    @GetMapping("/user/:id")
+    public ResponseEntity<Integer> getId(@PathVariable Integer id){
+        return ResponseEntity.ok(id);
+    }
     @PutMapping("/users/:id")
     public ResponseEntity<UsersResponse> modifyUser(@RequestBody Users user, @PathVariable Integer id){
         Users newUser = serviUser.modifyUser(user, id);

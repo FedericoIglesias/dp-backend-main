@@ -2,6 +2,7 @@ package dhm.singlesignon.controller;
 
 import dhm.singlesignon.dto.UsersResponse;
 import dhm.singlesignon.model.RequestUsers;
+import dhm.singlesignon.model.Role;
 import dhm.singlesignon.model.Users;
 import dhm.singlesignon.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class RegisterController {
                 .username(request.getEmail())
                 .lastname(request.getLastname())
                 .password(request.getPassword())
+                .role(Role.USER)
                 .build();
         UsersResponse resUser = serviUser.registerUser(user);
         return ResponseEntity.ok(resUser);

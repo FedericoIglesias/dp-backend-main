@@ -27,5 +27,6 @@ public class Users {
     @Column(nullable = false,unique = true)
     String cvu;
     String token;
-
+    @Enumerated(EnumType.STRING)
+    Role role = Role.USER;
 }

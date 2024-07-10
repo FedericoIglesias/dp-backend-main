@@ -24,6 +24,7 @@ public class UsersService {
         user.setAlias(createAlias());
         user.setCvu(createCVU());
         user.setPassword(passwordEncoder().encode(user.getPassword()));
+
         repoUsers.save(user);
         Users userResponse = repoUsers.findByUsername(user.getUsername());
         return UsersResponse.builder()
