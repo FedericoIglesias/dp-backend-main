@@ -1,8 +1,6 @@
 package dhm.profile.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,10 +15,18 @@ import org.apache.catalina.User;
 public class Cards {
 
     @Id
+    @GeneratedValue
     Integer id;
+    @Column(unique = true,nullable = false)
     String bank;
-    String number;
+    @Column(unique = true,nullable = false)
+    Integer number;
+    @Column(unique = true,nullable = false)
+    String endDate;
+    @Column(unique = true,nullable = false)
+    Integer cvv;
     @ManyToOne
+    @JoinColumn(unique = true,nullable = false)
     Users users;
 
 }

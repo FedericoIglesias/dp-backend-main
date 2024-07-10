@@ -35,8 +35,8 @@ public class Users implements UserDetails {
     String token;
     @Enumerated(EnumType.STRING)
     Role role = Role.USER;
-    //@OneToMany(mappedBy = "users")
-    //List<Cards> listCards;
+    @OneToMany(mappedBy = "users")
+    List<Cards> listCards;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
