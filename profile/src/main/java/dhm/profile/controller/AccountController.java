@@ -1,8 +1,11 @@
 package dhm.profile.controller;
 
+import dhm.profile.model.Transactions;
 import dhm.profile.service.CheckLoginService;
 import dhm.profile.model.Cards;
 import dhm.profile.service.CardsService;
+import dhm.profile.service.TransactionsService;
+import dhm.profile.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,29 +14,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-
 @RestController
-@RequestMapping("/cards")
-public class CardsController {
+@RequestMapping("/accounts")
+public class AccountController {
 
+    @Autowired
+    TransactionsService serviHistory;
     @Autowired
     CardsService serviCards;
 
     @Autowired
+    UsersService serviUser;
+
+    @Autowired
     CheckLoginService serviCheckLogin;
 
-    @GetMapping("/accounts/{idUser}/cards")
+    @GetMapping("/{idUser}/cards")
     public ResponseEntity<List<Cards>> getListCards(@PathVariable Integer idUser){
         return ResponseEntity.ok(serviCards.getListCards(idUser));
     }
 
-    @GetMapping("/accounts/{idUser}/cards/{idCard}")
+    @GetMapping("/{idUser}/cards/{idCard}")
     public ResponseEntity<Cards> getCard(@PathVariable("idUser") Integer idUser, @PathVariable("idCard") Integer idCard){
         return  ResponseEntity.ok(serviCards.getCard(idUser,idCard));
     }
 
-    @PostMapping("/accounts/{idUser}/cards")
+    @PostMapping("/{idUser}/cards")
     public ResponseEntity saveCard(@RequestBody Cards card, @PathVariable("idUser") Integer idUser, HttpServletRequest request){
         Boolean check = serviCheckLogin.checkLogin(request, idUser);
         if(!check){
@@ -44,7 +50,7 @@ public class CardsController {
         return new ResponseEntity<>("Success to create card", HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/accounts/{idUser}/cards/{idCard}")
+    @DeleteMapping("/{idUser}/cards/{idCard}")
     public ResponseEntity deleteCard(@PathVariable("idCard") Integer idCard,@PathVariable("idUser") Integer idUser, HttpServletRequest request){
         Boolean check = serviCheckLogin.checkLogin(request, idUser);
         if(!check){
@@ -55,5 +61,19 @@ public class CardsController {
             return new ResponseEntity<>("Success to delete card", HttpStatus.OK);
         }
         return new ResponseEntity<>("Unsuccessful to create card", HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{idUser}")
+    public ResponseEntity getMoney(@PathVariable("idUser") Integer idUser, HttpServletRequest request){
+        Boolean check = serviCheckLogin.checkLogin(request, idUser);
+        return new ResponseEntity(serviUser.getUser(idUser).getMoney(),HttpStatus.OK);
+    }
+
+    @GetMapping("/{idUser}/transactions")
+    public ResponseEntity getTransactionsOfUser(@PathVariable("idUser") Integer idUser, HttpServletRequest request){
+        Boolean check = serviCheckLogin.checkLogin(request, idUser);
+        List<Transactions> listTransactions = serviHistory.getTransactionsUser(idUser);
+        return new ResponseEntity<>(listTransactions.subList(listTransactions.size() - 5, listTransactions.size()),
+                HttpStatus.OK);
     }
 }

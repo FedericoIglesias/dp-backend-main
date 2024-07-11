@@ -33,10 +33,13 @@ public class Users implements UserDetails {
     @Column(nullable = false,unique = true)
     String cvu;
     String token;
+    Float money;
     @Enumerated(EnumType.STRING)
     Role role = Role.USER;
     @OneToMany(mappedBy = "users")
     List<Cards> listCards;
+    @OneToMany(mappedBy = "users")
+    List<Transactions> listTransactions;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
