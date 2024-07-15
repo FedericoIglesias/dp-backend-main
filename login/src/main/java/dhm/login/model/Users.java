@@ -16,15 +16,17 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Users {
     @Id
-    @GeneratedValue
+    //@GeneratedValue
     Integer id;
-    @Column(nullable = false)
+    //@Column(nullable = false)*/
     String username;//email
-    String name;
+    String password;
+    String token;
+   /* String name;
     String lastname;
     String phone;
-    String password;
+
     String alias;
-    String cvu;
-    String token;
+    String cvu;*/
+
 }

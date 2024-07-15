@@ -10,6 +10,7 @@
         <module name="logout" />
         <module name="register-login" />
         <module name="eureka" />
+        <module name="jwt" />
         <module name="profile" />
         <module name="login" />
         <module name="gateway" />
@@ -21,6 +22,7 @@
       <module name="demo-jwt" target="17" />
       <module name="eureka" target="17" />
       <module name="gateway" target="17" />
+      <module name="jwt" target="17" />
       <module name="login" target="17" />
       <module name="logout" target="17" />
       <module name="profile" target="17" />
@@ -35,6 +37,7 @@
       <module name="demo-jwt" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="jwt" options="-parameters" />
       <module name="login" options="-parameters" />
       <module name="logout" options="-parameters" />
       <module name="profile" options="-parameters" />

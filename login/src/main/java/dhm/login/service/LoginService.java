@@ -3,6 +3,7 @@ package dhm.login.service;
 import dhm.login.dto.LoginRequestDTO;
 import dhm.login.dto.LoginResponseDTO;
 import dhm.login.model.Users;
+import dhm.login.repository.IFeignJwtRepository;
 import dhm.login.repository.ILoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,13 +16,17 @@ public class LoginService {
     @Autowired
     ILoginRepository repoLogin;
 
-    @Autowired
-    JwtService serviJwt;
+    private IFeignJwtRepository feignJwt;
+
+    public LoginService(IFeignJwtRepository feignJwt) {
+        super();
+        this.feignJwt = feignJwt;
+    }
 
     public LoginResponseDTO login(LoginRequestDTO requestDTO){
         Users user = repoLogin.findByUsername(requestDTO.getEmail());
         if(passwordEncoder().matches(requestDTO.getPassword(), user.getPassword())){
-            String token = serviJwt.getToken(user);
+            String token = feignJwt.getToken(user);
             user.setToken(token);
             repoLogin.save(user);
             return LoginResponseDTO.builder()
@@ -34,4 +39,5 @@ public class LoginService {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

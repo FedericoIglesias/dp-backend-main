@@ -1,15 +1,13 @@
-package dhm.login;
+package dhm.jwt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients
-public class LoginApplication {
+public class JwtApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LoginApplication.class, args);
+		SpringApplication.run(JwtApplication.class, args);
 	}
 
 }
