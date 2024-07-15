@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "jwt")
 public interface IFeignJwtRepository {
-    @RequestMapping(method = RequestMethod.GET,value="/jwt")
-    String getToken(@RequestParam Users user);
+    @RequestMapping(method = RequestMethod.GET,value="/jwt/token")
+    String getToken(@RequestParam String username);
 }

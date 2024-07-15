@@ -12,9 +12,10 @@ public class JwtController {
     @Autowired
     JwtService serviJwt;
 
-    @GetMapping()
-    public String getToken(@RequestParam Users user){
-        return serviJwt.getToken(user);
+    @GetMapping("/token")
+    public String getToken(@RequestParam String username){
+        System.out.println("pegada a jwt");
+        return serviJwt.getToken(username);
     }
 
 }

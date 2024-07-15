@@ -16,17 +16,14 @@ public class LoginService {
     @Autowired
     ILoginRepository repoLogin;
 
-    private IFeignJwtRepository feignJwt;
+    @Autowired
+    IFeignJwtRepository feignJwt;
 
-    public LoginService(IFeignJwtRepository feignJwt) {
-        super();
-        this.feignJwt = feignJwt;
-    }
 
     public LoginResponseDTO login(LoginRequestDTO requestDTO){
         Users user = repoLogin.findByUsername(requestDTO.getEmail());
         if(passwordEncoder().matches(requestDTO.getPassword(), user.getPassword())){
-            String token = feignJwt.getToken(user);
+            String token = feignJwt.getToken(user.getUsername());
             user.setToken(token);
             repoLogin.save(user);
             return LoginResponseDTO.builder()

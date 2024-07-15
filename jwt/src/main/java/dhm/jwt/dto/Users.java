@@ -10,5 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
+    Integer id;
     String username;
+    String password;
+    String token;
 }
