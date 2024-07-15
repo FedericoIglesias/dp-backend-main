@@ -1,6 +1,7 @@
 package dhm.logout.service;
 
 import dhm.logout.model.Users;
+import dhm.logout.repository.IFeignJwtRepository;
 import dhm.logout.repository.IUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,10 +14,10 @@ public class LogoutService {
     IUsersRepository repoUsers;
 
     @Autowired
-    JwtService serviJwt;
+    IFeignJwtRepository feignJwt;
 
     public String invalidateToken(String token) {
-        String username = serviJwt.getUsernameFromToken(token);
+        String username = feignJwt.getUsernameFromToken(token);
 
         Users user = repoUsers.findByUsername(username);
 

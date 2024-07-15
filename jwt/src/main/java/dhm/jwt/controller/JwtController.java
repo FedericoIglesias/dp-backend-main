@@ -14,8 +14,12 @@ public class JwtController {
 
     @GetMapping("/token")
     public String getToken(@RequestParam String username){
-        System.out.println("pegada a jwt");
         return serviJwt.getToken(username);
+    }
+
+    @GetMapping("/username")
+    public String getUsernameFromToken(@RequestParam String token){
+        return serviJwt.getUsernameFromToken(token);
     }
 
 }
