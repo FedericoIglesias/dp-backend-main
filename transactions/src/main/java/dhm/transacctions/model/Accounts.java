@@ -19,9 +19,7 @@ public class Accounts {
         @GeneratedValue
         Integer id;
         @Column(nullable = false, unique = true)
-        Float money;
-        @OneToOne
-        Users user;
+        Float amount;
         @OneToMany(mappedBy = "account")
         List<Cards> listCards;
         @OneToMany(mappedBy = "account")

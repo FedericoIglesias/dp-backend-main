@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Users {
+public class Accounts {
     @Id
     @GeneratedValue
     Integer id;

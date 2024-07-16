@@ -2,7 +2,7 @@ package dhm.login.service;
 
 import dhm.login.dto.LoginRequestDTO;
 import dhm.login.dto.LoginResponseDTO;
-import dhm.login.model.Users;
+import dhm.login.model.Accounts;
 import dhm.login.repository.IFeignJwtRepository;
 import dhm.login.repository.ILoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class LoginService {
 
 
     public LoginResponseDTO login(LoginRequestDTO requestDTO){
-        Users user = repoLogin.findByUsername(requestDTO.getEmail());
+        Accounts user = repoLogin.findByUsername(requestDTO.getEmail());
         if(passwordEncoder().matches(requestDTO.getPassword(), user.getPassword())){
             String token = feignJwt.getToken(user.getUsername());
             user.setToken(token);

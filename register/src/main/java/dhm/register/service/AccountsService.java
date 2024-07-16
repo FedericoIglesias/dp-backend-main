@@ -1,8 +1,8 @@
 package dhm.register.service;
 
 import dhm.register.dto.UsersResponse;
-import dhm.register.model.Users;
-import dhm.register.repository.IUsersRepository;
+import dhm.register.model.Accounts;
+import dhm.register.repository.IAccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,16 +16,16 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class UsersService {
+public class AccountsService {
     @Autowired
-    IUsersRepository repoUsers;
+    IAccountsRepository repoUsers;
 
-    public UsersResponse registerUser(Users user){
+    public UsersResponse registerUser(Accounts user){
         user.setAlias(createAlias());
         user.setCvu(createCVU());
         user.setPassword(passwordEncoder().encode(user.getPassword()));
         repoUsers.save(user);
-        Users userResponse = repoUsers.findByUsername(user.getUsername());
+        Accounts userResponse = repoUsers.findByUsername(user.getUsername());
         return UsersResponse.builder()
                 .name(userResponse.getName())
                 .lastname(userResponse.getLastname())
@@ -47,7 +47,7 @@ public class UsersService {
 
     public String createAlias(){
         String alias = "";
-        String filePath = "C:\\Users\\Portatil\\Desktop\\myFolder\\myProject\\digitalMoneyHouse\\dp-backend-main\\register-login\\src\\main\\java\\dhm_backend\\register_login\\service\\alias.txt";
+        String filePath = "C:\\Users\\Portatil\\Desktop\\myFolder\\myProject\\digitalMoneyHouse\\dp-backend-main\\register\\src\\main\\java\\dhm\\register\\service\\alias.txt";
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             alias = alias + lines.get(new Random().nextInt(100)) + ".";
