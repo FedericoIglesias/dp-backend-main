@@ -11,8 +11,8 @@
         <module name="eureka" />
         <module name="jwt" />
         <module name="profile" />
-        <module name="transacctions" />
         <module name="login" />
+        <module name="transactions" />
         <module name="gateway" />
         <module name="account" />
         <module name="card" />
@@ -33,7 +33,7 @@
       <module name="register-login" target="17" />
       <module name="registerService" target="17" />
       <module name="singlesignon" target="17" />
-      <module name="transacctions" target="17" />
+      <module name="transactions" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -51,7 +51,7 @@
       <module name="register-login" options="-parameters" />
       <module name="registerService" options="-parameters" />
       <module name="singlesignon" options="-parameters" />
-      <module name="transacctions" options="-parameters" />
+      <module name="transactions" options="-parameters" />
     </option>
   </component>
 </project>

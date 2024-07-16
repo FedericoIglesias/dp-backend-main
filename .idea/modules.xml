@@ -12,7 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/logout/logout.iml" filepath="$PROJECT_DIR$/logout/logout.iml" />
       <module fileurl="file://$PROJECT_DIR$/profile/profile.iml" filepath="$PROJECT_DIR$/profile/profile.iml" />
       <module fileurl="file://$PROJECT_DIR$/register/register.iml" filepath="$PROJECT_DIR$/register/register.iml" />
-      <module fileurl="file://$PROJECT_DIR$/transacctions/transacctions.iml" filepath="$PROJECT_DIR$/transacctions/transacctions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/transacctions/transactions.iml" filepath="$PROJECT_DIR$/transacctions/transactions.iml" />
     </modules>
   </component>
 </project>

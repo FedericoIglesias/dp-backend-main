@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/transacctions")
+@RequestMapping("/transactions")
 public class TransactionsController {
 
     @Autowired
     TransactionsService serviTransaction;
 
-    @GetMapping("/{id}")
+    @GetMapping("/transaction")
     public Transactions getTransaction(@RequestParam Integer id) {
         return serviTransaction.getTransaction(id);
     }
