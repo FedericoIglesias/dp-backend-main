@@ -36,4 +36,22 @@ public class AccountService {
         repoAccount.save(account);
     }
 
+    public Accounts getAccount(Integer id) {
+        return repoAccount.findById(id).orElse(null);
+    }
+
+    public String modifyAccount(Integer id, Accounts account) {
+         Accounts oldAccount =repoAccount.findById(id).orElse(null);
+         if(oldAccount == null){
+             return "Unsuccessful to found Id";
+         }
+
+         oldAccount.setAlias(account.getAlias());
+         oldAccount.setName(account.getName());
+         oldAccount.setLastname(account.getLastname());
+         oldAccount.setPhone(account.getPhone());
+         repoAccount.save(oldAccount);
+
+         return "Success to modify Account";
+    }
 }

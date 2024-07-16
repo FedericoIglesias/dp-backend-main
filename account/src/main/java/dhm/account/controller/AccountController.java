@@ -20,8 +20,19 @@ public class AccountController {
         return new ResponseEntity("serviAccount.getListTransactionUser(id)", HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/balance/{id}")
     public ResponseEntity getAmount(@PathVariable Integer id){
         return new ResponseEntity<>(serviAccount.getAmount(id), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getInfo(@PathVariable Integer id){
+        return new ResponseEntity(serviAccount.getAccount(id), HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity modifyInfo(@PathVariable Integer id, @RequestBody Accounts account){
+
+        return new ResponseEntity<>(serviAccount.modifyAccount(id,account),HttpStatus.ACCEPTED);
+    }
+
 }
