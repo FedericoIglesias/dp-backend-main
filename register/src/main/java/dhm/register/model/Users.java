@@ -6,9 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.management.relation.Role;
-import java.util.Collection;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -29,4 +26,6 @@ public class Users {
     @Column(nullable = false,unique = true)
     String cvu;
     String token;
+    @Enumerated(EnumType.STRING)
+    Role role = Role.USER;
 }

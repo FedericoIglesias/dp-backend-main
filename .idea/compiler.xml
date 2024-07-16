@@ -8,17 +8,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="logout" />
-        <module name="register-login" />
         <module name="eureka" />
         <module name="jwt" />
         <module name="profile" />
+        <module name="transacctions" />
         <module name="login" />
         <module name="gateway" />
+        <module name="account" />
+        <module name="card" />
         <module name="register" />
-        <module name="singlesignon" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="account" target="17" />
+      <module name="card" target="17" />
       <module name="demo-jwt" target="17" />
       <module name="eureka" target="17" />
       <module name="gateway" target="17" />
@@ -30,10 +33,13 @@
       <module name="register-login" target="17" />
       <module name="registerService" target="17" />
       <module name="singlesignon" target="17" />
+      <module name="transacctions" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="account" options="-parameters" />
+      <module name="card" options="-parameters" />
       <module name="demo-jwt" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="gateway" options="-parameters" />
@@ -45,6 +51,7 @@
       <module name="register-login" options="-parameters" />
       <module name="registerService" options="-parameters" />
       <module name="singlesignon" options="-parameters" />
+      <module name="transacctions" options="-parameters" />
     </option>
   </component>
 </project>
