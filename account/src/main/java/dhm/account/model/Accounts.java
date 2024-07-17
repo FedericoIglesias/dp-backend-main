@@ -38,6 +38,4 @@ public class Accounts {
         List<Cards> listCards;
         @OneToMany(mappedBy = "account")
         List<Transactions> listTransactions;
-//    @Enumerated(EnumType.STRING)
-        //  Role role = Role.USER;
 }

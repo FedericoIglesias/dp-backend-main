@@ -28,7 +28,9 @@ public class CardsController {
 
     @GetMapping("/{id}")
     public ResponseEntity getCard(@PathVariable Integer id){
-        return new ResponseEntity(serviCards.getCard(id),HttpStatus.OK);
+        Cards card = serviCards.getCard(id);
+        card.setAccount(null);
+        return new ResponseEntity(card,HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

@@ -35,4 +35,13 @@ public class AccountController {
         return new ResponseEntity<>(serviAccount.modifyAccount(id,account),HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/{id}/cards")
+    public ResponseEntity getListCardsAccounts(@PathVariable Integer id){
+        return new ResponseEntity<>(serviAccount.getCardsAccount(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/cards/{idCard}")
+    public ResponseEntity getListCardsAccounts(@PathVariable Integer id, @PathVariable Integer idCard){
+        return new ResponseEntity<>(serviAccount.getCard(idCard),HttpStatus.OK);
+    }
 }
