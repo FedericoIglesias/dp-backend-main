@@ -42,4 +42,8 @@ public class CardsService {
 
         return "Success to modify card";
     }
+
+    public List<Cards> getUserCards(Integer idUser) {
+        return repoCards.findByAccountId(idUser);
+    }
 }

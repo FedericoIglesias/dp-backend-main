@@ -7,12 +7,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cards")
 public class CardsController {
 
     @Autowired
     CardsService serviCards;
+
+    @GetMapping("/status")
+    public ResponseEntity getStatus(){
+        return new ResponseEntity<>("STATUS UP",HttpStatus.OK);
+    }
 
     @GetMapping
     public ResponseEntity getListCards(){
@@ -40,5 +47,10 @@ public class CardsController {
     public ResponseEntity modifyCard(@PathVariable Integer id, @RequestBody Cards card){
         serviCards.modifyCard(id,card);
         return new ResponseEntity("Success to modify card",HttpStatus.OK);
+    }
+
+    @GetMapping("/account")
+    public List<Cards> getUsersCards(@RequestParam Integer idUser){
+        return serviCards.getUserCards(idUser);
     }
 }
