@@ -51,6 +51,10 @@ public class CardsController {
 
     @GetMapping("/account")
     public List<Cards> getUsersCards(@RequestParam Integer idUser){
-        return serviCards.getUserCards(idUser);
+        List<Cards> listCards = serviCards.getUserCards(idUser);
+                for (Cards card : listCards){
+                    card.setAccount(null);
+                }
+        return listCards;
     }
 }

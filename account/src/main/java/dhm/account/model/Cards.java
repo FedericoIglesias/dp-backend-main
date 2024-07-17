@@ -25,7 +25,7 @@ public class Cards {
     @Column(nullable = false)
     Integer cvv;
     @ManyToOne
-    @JoinColumn(unique = true,nullable = false)
+    @JoinColumn(nullable = false)
     Accounts account;
 
 }
