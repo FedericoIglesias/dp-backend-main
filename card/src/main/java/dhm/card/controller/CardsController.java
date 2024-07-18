@@ -41,7 +41,10 @@ public class CardsController {
 
     @PostMapping
     public ResponseEntity saveCard(@RequestBody Cards card){
-        serviCards.saveCards(card);
+        Integer res = serviCards.saveCards(card);
+        if(res == 0){
+            return new ResponseEntity("Fail to save Card",HttpStatus.CONFLICT);
+        }
         return new ResponseEntity("Success to save Card",HttpStatus.CREATED);
     }
 
@@ -58,5 +61,9 @@ public class CardsController {
                     card.setAccount(null);
                 }
         return listCards;
+    }
+    @PostMapping("/save")
+    public Integer saveCardFromAccount(@RequestBody Cards card){
+        return serviCards.saveCards(card);
     }
 }

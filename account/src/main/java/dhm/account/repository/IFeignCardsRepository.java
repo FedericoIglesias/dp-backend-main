@@ -3,11 +3,9 @@ package dhm.account.repository;
 import dhm.account.model.Cards;
 import dhm.account.model.Transactions;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,4 +19,6 @@ public interface IFeignCardsRepository {
     @RequestMapping(method = RequestMethod.GET,value="/api/cards/{id}")
     Cards getCard(@PathVariable Integer id);
 
+    @RequestMapping(method = RequestMethod.POST,value = "/api/cards/save")
+    Integer saveCard(@RequestBody Cards card);
 }

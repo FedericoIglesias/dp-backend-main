@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ICardsRepository extends JpaRepository<Cards, Integer> {
     List<Cards> findByAccountId(Integer account_id);
+    Cards findByNumber(Integer number);
 }

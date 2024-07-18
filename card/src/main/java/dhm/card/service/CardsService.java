@@ -20,8 +20,14 @@ public class CardsService {
         return repoCards.findById(id).orElse(null);
     }
 
-    public void saveCards(Cards card){
-        repoCards.save(card);
+    public Integer saveCards(Cards card){
+        Cards res= repoCards.findByNumber(card.getNumber());
+        if(res == null){
+            repoCards.save(card);
+            return 1;
+        }
+        return 0;
+
     }
 
     public void deleteCard(Integer id){

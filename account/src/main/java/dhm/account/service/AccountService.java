@@ -7,6 +7,7 @@ import dhm.account.repository.IAccountsRepository;
 import dhm.account.repository.IFeignCardsRepository;
 import dhm.account.repository.IFeignTransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
@@ -65,5 +66,9 @@ public class AccountService {
          repoAccount.save(oldAccount);
 
          return "Success to modify Account";
+    }
+
+    public Integer saveCard(Cards card) {
+        return feignCards.saveCard(card);
     }
 }
