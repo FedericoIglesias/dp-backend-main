@@ -71,4 +71,8 @@ public class AccountService {
     public Integer saveCard(Cards card) {
         return feignCards.saveCard(card);
     }
+
+    public Integer deleteCard(Integer idCard) {
+        return feignCards.deleteCard(idCard);
+    }
 }

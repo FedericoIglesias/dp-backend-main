@@ -66,4 +66,10 @@ public class CardsController {
     public Integer saveCardFromAccount(@RequestBody Cards card){
         return serviCards.saveCards(card);
     }
+
+    @DeleteMapping("/delete")
+    public Integer deleteCardFromAccount(@RequestParam Integer id){
+        System.out.println("into the delete");
+        return serviCards.deleteCardFromAccount(id);
+    }
 }

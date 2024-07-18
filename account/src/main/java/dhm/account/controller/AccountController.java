@@ -56,4 +56,12 @@ public class AccountController {
         return new ResponseEntity<>("Conflict to save card", HttpStatus.CONFLICT);
     }
 
+    @DeleteMapping("/{id}/cards/{idCard}")
+    public ResponseEntity deleteCard(@PathVariable Integer id,@PathVariable Integer idCard){
+        Integer res = serviAccount.deleteCard(idCard);
+        if(res == 0){
+            return new ResponseEntity<>("Card not found",HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>("Success to delete card",HttpStatus.OK);
+    }
 }

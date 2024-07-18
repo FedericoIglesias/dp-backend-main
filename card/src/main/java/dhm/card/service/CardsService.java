@@ -52,4 +52,13 @@ public class CardsService {
     public List<Cards> getUserCards(Integer idUser) {
         return repoCards.findByAccountId(idUser);
     }
+
+    public Integer deleteCardFromAccount(Integer id) {
+        Cards res= repoCards.findById(id).orElse(null);
+        if(res == null){
+            return 0;
+        }
+        repoCards.deleteById(id);
+        return 1;
+    }
 }

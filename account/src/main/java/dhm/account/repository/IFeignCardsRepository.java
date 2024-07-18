@@ -21,4 +21,7 @@ public interface IFeignCardsRepository {
 
     @RequestMapping(method = RequestMethod.POST,value = "/api/cards/save")
     Integer saveCard(@RequestBody Cards card);
+
+    @RequestMapping(method = RequestMethod.DELETE,value = "/api/cards/delete")
+    Integer deleteCard(@RequestParam Integer id);
 }
