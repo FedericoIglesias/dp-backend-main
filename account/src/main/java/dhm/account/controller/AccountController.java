@@ -20,6 +20,15 @@ public class AccountController {
         //return new ResponseEntity(serviAccount.getListTransactionUser(id), HttpStatus.OK);
         return new ResponseEntity("serviAccount.getListTransactionUser(id)", HttpStatus.OK);
     }
+    @GetMapping("/{id}/activity/{transferenceId}")
+    public ResponseEntity getTransferenceUser(@PathVariable Integer id, @PathVariable Integer transferenceId) {
+        return new ResponseEntity("You transference is: " + transferenceId , HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/activity")
+    public ResponseEntity getActivityUser(@PathVariable Integer id) {
+        return new ResponseEntity("Your activity", HttpStatus.OK);
+    }
 
     @GetMapping("/balance/{id}")
     public ResponseEntity getAmount(@PathVariable Integer id) {
