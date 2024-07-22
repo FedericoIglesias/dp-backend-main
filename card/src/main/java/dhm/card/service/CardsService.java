@@ -1,7 +1,9 @@
 package dhm.card.service;
 
 import dhm.card.model.Cards;
+import dhm.card.model.Transference;
 import dhm.card.repository.ICardsRepository;
+import dhm.card.repository.IFeignTransferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +14,20 @@ public class CardsService {
     @Autowired
     ICardsRepository repoCards;
 
-    public List<Cards> getListCards(){
+    @Autowired
+    IFeignTransferenceRepository feignTransference;
+
+    public List<Cards> getListCards() {
         return repoCards.findAll();
     }
 
-    public Cards getCard(Integer id){
+    public Cards getCard(Integer id) {
         return repoCards.findById(id).orElse(null);
     }
 
-    public Integer saveCards(Cards card){
-        Cards res= repoCards.findByNumber(card.getNumber());
-        if(res == null){
+    public Integer saveCards(Cards card) {
+        Cards res = repoCards.findByNumber(card.getNumber());
+        if (res == null) {
             repoCards.save(card);
             return 1;
         }
@@ -30,13 +35,13 @@ public class CardsService {
 
     }
 
-    public void deleteCard(Integer id){
+    public void deleteCard(Integer id) {
         repoCards.deleteById(id);
     }
 
-    public String modifyCard(Integer id, Cards card){
+    public String modifyCard(Integer id, Cards card) {
         Cards oldCard = getCard(id);
-        if(oldCard == null){
+        if (oldCard == null) {
             return "Unsuccessful to find card";
         }
         oldCard.setCvv(card.getCvv());
@@ -54,11 +59,20 @@ public class CardsService {
     }
 
     public Integer deleteCardFromAccount(Integer id) {
-        Cards res= repoCards.findById(id).orElse(null);
-        if(res == null){
+        Cards res = repoCards.findById(id).orElse(null);
+        if (res == null) {
             return 0;
         }
         repoCards.deleteById(id);
         return 1;
+    }
+
+    public Integer saveTransference(Transference transference) {
+        try {
+            feignTransference.saveTransference(transference);
+            return 1;
+        } catch (Error e) {
+            return 0;
+        }
     }
 }

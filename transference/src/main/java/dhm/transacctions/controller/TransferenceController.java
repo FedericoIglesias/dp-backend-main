@@ -18,7 +18,7 @@ public class TransferenceController {
     }
 
     @PostMapping
-    public void saveTransaction(@RequestParam Transference transference) {
+    public void saveTransaction(@RequestBody Transference transference) {
         serviTransaction.saveTransaction(transference);
     }
 }

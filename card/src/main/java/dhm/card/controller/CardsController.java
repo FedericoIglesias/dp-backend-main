@@ -1,6 +1,7 @@
 package dhm.card.controller;
 
 import dhm.card.model.Cards;
+import dhm.card.model.Transference;
 import dhm.card.service.CardsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,5 +72,14 @@ public class CardsController {
     public Integer deleteCardFromAccount(@RequestParam Integer id){
         System.out.println("into the delete");
         return serviCards.deleteCardFromAccount(id);
+    }
+
+    @PostMapping("/accounts/{id}/transferences")
+    public ResponseEntity saveTransference(@RequestBody Transference transference){
+        Integer res = serviCards.saveTransference(transference);
+        if(res == 0){
+            return new ResponseEntity<>("Unsuccessful to save transference", HttpStatus.NOT_ACCEPTABLE);
+        }
+        return  new ResponseEntity<>("Success to save transference", HttpStatus.CREATED);
     }
 }
