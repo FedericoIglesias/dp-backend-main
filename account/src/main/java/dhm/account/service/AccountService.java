@@ -2,22 +2,20 @@ package dhm.account.service;
 
 import dhm.account.model.Accounts;
 import dhm.account.model.Cards;
-import dhm.account.model.Transactions;
+import dhm.account.model.Transference;
 import dhm.account.repository.IAccountsRepository;
 import dhm.account.repository.IFeignCardsRepository;
-import dhm.account.repository.IFeignTransactionsRepository;
+import dhm.account.repository.IFeignTransferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.util.List;
 
 @Service
 public class AccountService {
 
     @Autowired
-    IFeignTransactionsRepository feignTransaction;
+    IFeignTransferenceRepository feignTransaction;
     @Autowired
     IFeignCardsRepository feignCards;
 
@@ -28,7 +26,7 @@ public class AccountService {
     public List<Cards> getCardsAccount(Integer idUser){
         return feignCards.getCards(idUser);
     }
-    public List<Transactions> getListTransactionUser(Integer id){
+    public List<Transference> getListTransactionUser(Integer id){
 
         return feignTransaction.getTransaction(id);
     }

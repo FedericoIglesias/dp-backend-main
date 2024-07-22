@@ -1,6 +1,6 @@
-package dhm.account.repository;
+package dhm.card.repository;
 
-import dhm.account.model.Transactions;
+import dhm.card.model.Transference;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Repository
-@FeignClient(name = "transactions")
-public interface IFeignTransactionsRepository {
+@FeignClient(name="transference")
+public interface IFeignTransferenceRepository {
 
-    @RequestMapping(method = RequestMethod.GET,value="/transaction")
-    List<Transactions> getTransaction(@RequestParam Integer idAccount);
+    @RequestMapping(method = RequestMethod.GET,value="/api/cards/account")
+    List<Transference> saveTransference(@RequestParam Integer idUser);
 }

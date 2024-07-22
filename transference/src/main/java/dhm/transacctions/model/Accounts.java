@@ -10,19 +10,14 @@ import java.util.List;
 
 @Data
 @Builder
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Accounts {
 
-        @Id
-        @GeneratedValue
+
         Integer id;
-        @Column(nullable = false, unique = true)
         Float amount;
-        @OneToMany(mappedBy = "account")
         List<Cards> listCards;
-        @OneToMany(mappedBy = "account")
-        List<Transactions> listTransactions;
+        List<Transference> listTransactions;
 
     }

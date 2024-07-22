@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/profile/profile.iml" filepath="$PROJECT_DIR$/profile/profile.iml" />
       <module fileurl="file://$PROJECT_DIR$/register/register.iml" filepath="$PROJECT_DIR$/register/register.iml" />
       <module fileurl="file://$PROJECT_DIR$/transacctions/transactions.iml" filepath="$PROJECT_DIR$/transacctions/transactions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/transactions/transference.iml" filepath="$PROJECT_DIR$/transactions/transference.iml" />
     </modules>
   </component>
 </project>

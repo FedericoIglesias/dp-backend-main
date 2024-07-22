@@ -1,9 +1,7 @@
 package dhm.account.repository;
 
 import dhm.account.model.Cards;
-import dhm.account.model.Transactions;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
