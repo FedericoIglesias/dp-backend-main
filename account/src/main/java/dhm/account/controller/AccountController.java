@@ -15,6 +15,11 @@ public class AccountController {
     @Autowired
     AccountService serviAccount;
 
+    @GetMapping
+    public ResponseEntity getStatus(){
+        return new ResponseEntity("STATUS UP", HttpStatus.OK);
+    }
+
     @GetMapping("/{id}/transactions")
     public ResponseEntity getTransacciontUser(@PathVariable Integer id) {
         //return new ResponseEntity(serviAccount.getListTransactionUser(id), HttpStatus.OK);

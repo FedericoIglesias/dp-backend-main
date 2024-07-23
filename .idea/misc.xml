@@ -9,7 +9,6 @@
         <option value="$PROJECT_DIR$/register/pom.xml" />
         <option value="$PROJECT_DIR$/logout/pom.xml" />
         <option value="$PROJECT_DIR$/login/pom.xml" />
-        <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/profile/pom.xml" />
         <option value="$PROJECT_DIR$/singlesignon/pom.xml" />
         <option value="$PROJECT_DIR$/eureka/pom.xml" />
@@ -19,6 +18,7 @@
         <option value="$PROJECT_DIR$/transacctions/pom.xml" />
         <option value="$PROJECT_DIR$/transactions/pom.xml" />
         <option value="$PROJECT_DIR$/transference/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
       </list>
     </option>
   </component>

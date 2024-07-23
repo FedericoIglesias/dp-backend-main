@@ -14,9 +14,9 @@
         <module name="profile" />
         <module name="login" />
         <module name="transactions" />
-        <module name="gateway" />
         <module name="account" />
         <module name="card" />
+        <module name="gateway" />
         <module name="register" />
       </profile>
     </annotationProcessing>
