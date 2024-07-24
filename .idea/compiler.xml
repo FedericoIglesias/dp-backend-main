@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="logout" />
+        <module name="transference" />
         <module name="transference (1)" />
         <module name="eureka" />
         <module name="jwt" />

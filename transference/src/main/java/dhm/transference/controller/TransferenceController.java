@@ -19,7 +19,7 @@ public class TransferenceController {
         return new ResponseEntity<>("STATUS UP", HttpStatus.OK);
     }
 
-    @GetMapping()
+    @GetMapping
     public Transference getTransaction(@RequestParam Integer id) {
         return serviTransaction.getTransaction(id);
     }

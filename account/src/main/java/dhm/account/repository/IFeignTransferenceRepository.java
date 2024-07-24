@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Repository
-@FeignClient(name = "transactions")
+@FeignClient(name = "transference")
 public interface IFeignTransferenceRepository {
 
-    @RequestMapping(method = RequestMethod.GET,value="/transaction")
+    @RequestMapping(method = RequestMethod.GET)
     List<Transference> getTransaction(@RequestParam Integer idAccount);
 }

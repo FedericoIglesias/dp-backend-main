@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.swing.plaf.basic.BasicTreeUI;
 import java.util.List;
 
 @Repository
@@ -18,6 +17,6 @@ public interface IFeignTransferenceRepository {
     @RequestMapping(method = RequestMethod.GET,value="/api/cards/account")
     List<Transference> getListTransference(@RequestParam Integer idUser);
 
-    @RequestMapping(method = RequestMethod.POST,value = "/api/transactions")
+    @RequestMapping(method = RequestMethod.POST,value = "/api")
     void saveTransference(@RequestBody Transference transference);
 }

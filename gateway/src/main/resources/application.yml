@@ -13,7 +13,7 @@ spring:
         - id: transference
           uri: lb://transference
           predicates:
-            - Path=/transactions/**
+            - Path=/transference/**
 
   application:
     name: gateway

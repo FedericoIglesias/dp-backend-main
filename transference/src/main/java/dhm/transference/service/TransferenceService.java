@@ -5,6 +5,7 @@ import dhm.transference.repository.ITransferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,7 +27,15 @@ public class TransferenceService {
     }
 
     public List<Transference> getAccountTransactions(Integer id){
-        return repoTransactions.findByAccount(id);
+        List<Transference> listTransfe = new ArrayList<>();
+        for(Transference transference : repoTransactions.findAll()){
+            if(transference.getAccount().getId().equals(id)){
+                transference.setAccount(null);
+                listTransfe.add(transference);
+            }
+        }
+
+        return listTransfe;
     }
 
 }

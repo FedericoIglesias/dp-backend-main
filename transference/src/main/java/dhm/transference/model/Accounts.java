@@ -9,15 +9,18 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
+@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Accounts {
 
+    @Id
+    Integer id;
+    Float amount;
+    @OneToMany
+    List<Cards> listCards;
+    @OneToMany
+    List<Transference> listTransactions;
 
-        Integer id;
-        Float amount;
-        List<Cards> listCards;
-        List<Transference> listTransactions;
-
-    }
+}

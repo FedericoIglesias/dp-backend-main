@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ITransferenceRepository extends JpaRepository<Transference,Integer> {
-    List<Transference> findByAccount(Integer account_id);
+    // List<Transference> findByAccount(Integer account_id);
 }
