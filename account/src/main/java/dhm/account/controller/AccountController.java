@@ -15,7 +15,7 @@ public class AccountController {
     @Autowired
     AccountService serviAccount;
 
-    @GetMapping
+    @GetMapping("/status")
     public ResponseEntity getStatus(){
         return new ResponseEntity("STATUS UP", HttpStatus.OK);
     }

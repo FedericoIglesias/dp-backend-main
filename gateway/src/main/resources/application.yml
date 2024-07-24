@@ -3,15 +3,20 @@ spring:
     gateway:
       routes:
         - id: account
-          uri: http://localhost:8084
+          uri: lb://account
           predicates:
-          - Path=/accounts
+          - Path=/accounts/**
+        - id: card
+          uri: lb://card
+          predicates:
+            - Path=/cards/**
+        - id: transference
+          uri: lb://transference
+          predicates:
+            - Path=/transactions/**
+
   application:
     name: gateway
+
 server:
   port: 8087
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/

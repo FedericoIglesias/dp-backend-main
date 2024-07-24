@@ -11,7 +11,6 @@
         <module name="transference" />
         <module name="eureka" />
         <module name="jwt" />
-        <module name="profile" />
         <module name="login" />
         <module name="transactions" />
         <module name="account" />

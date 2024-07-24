@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/jwt/jwt.iml" filepath="$PROJECT_DIR$/jwt/jwt.iml" />
       <module fileurl="file://$PROJECT_DIR$/login/login.iml" filepath="$PROJECT_DIR$/login/login.iml" />
       <module fileurl="file://$PROJECT_DIR$/logout/logout.iml" filepath="$PROJECT_DIR$/logout/logout.iml" />
-      <module fileurl="file://$PROJECT_DIR$/profile/profile.iml" filepath="$PROJECT_DIR$/profile/profile.iml" />
       <module fileurl="file://$PROJECT_DIR$/register/register.iml" filepath="$PROJECT_DIR$/register/register.iml" />
       <module fileurl="file://$PROJECT_DIR$/transference/transactions.iml" filepath="$PROJECT_DIR$/transference/transactions.iml" />
       <module fileurl="file://$PROJECT_DIR$/transactions/transference.iml" filepath="$PROJECT_DIR$/transactions/transference.iml" />
