@@ -5,15 +5,15 @@ spring:
         - id: account
           uri: lb://account
           predicates:
-          - Path=/accounts/**
+          - Path=/api/accounts/**
         - id: card
           uri: lb://card
           predicates:
-            - Path=/cards/**
+            - Path=/api/cards/**
         - id: transference
           uri: lb://transference
           predicates:
-            - Path=/transference/**
+            - Path=/api/transference/**
 
   application:
     name: gateway
