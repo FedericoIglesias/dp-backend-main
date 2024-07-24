@@ -15,7 +15,6 @@
         <option value="$PROJECT_DIR$/account/pom.xml" />
         <option value="$PROJECT_DIR$/card/pom.xml" />
         <option value="$PROJECT_DIR$/transacctions/pom.xml" />
-        <option value="$PROJECT_DIR$/transactions/pom.xml" />
         <option value="$PROJECT_DIR$/transference/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
       </list>

@@ -8,7 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="logout" />
-        <module name="transference" />
+        <module name="transference (1)" />
         <module name="eureka" />
         <module name="jwt" />
         <module name="login" />
@@ -35,6 +35,7 @@
       <module name="singlesignon" target="17" />
       <module name="transactions" target="17" />
       <module name="transference" target="17" />
+      <module name="transference (1)" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -54,6 +55,7 @@
       <module name="singlesignon" options="-parameters" />
       <module name="transactions" options="-parameters" />
       <module name="transference" options="-parameters" />
+      <module name="transference (1)" options="-parameters" />
     </option>
   </component>
 </project>
