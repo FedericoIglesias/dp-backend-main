@@ -22,4 +22,8 @@ public class JwtController {
         return serviJwt.getUsernameFromToken(token);
     }
 
+    @GetMapping("/validate")
+    public Boolean isValidate(@RequestParam String token){
+        return serviJwt.isTokenExpired(token);
+    }
 }
