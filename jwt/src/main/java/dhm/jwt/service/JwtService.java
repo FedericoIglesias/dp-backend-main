@@ -20,15 +20,17 @@ import java.util.function.Function;
 public class JwtService {
     private static final String SECRET_KEY = "1234567890123456789012345678901234567890123456789012345678901234";
 
-    public String getToken(String user) {
-        return  getToken(new HashMap<>(),user);
+    public String getToken(String user, Integer id) {
+        return  getToken(new HashMap<>(),user, id);
     }
 
-    private <V, K> String getToken(Map<String, Objects> extraClaims, String user) {
+    private <V, K> String getToken(Map<String, Objects> extraClaims, String user, Integer id) {
+        String idStr = String.valueOf(id);
         return  Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(user)
+                .setId(idStr)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+ 1000*60*24))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
@@ -42,6 +44,10 @@ public class JwtService {
 
     public String getUsernameFromToken(String token) {
         return getClaim(token, Claims::getSubject);
+    }
+
+    public String getIdFromToken(String token) {
+        return getClaim(token, Claims::getId);
     }
 
     public boolean isTokenValid(String token, Users userDetails) {

@@ -20,11 +20,4 @@ public class Accounts {
     String username;//email
     String password;
     String token;
-   /* String name;
-    String lastname;
-    String phone;
-
-    String alias;
-    String cvu;*/
-
 }

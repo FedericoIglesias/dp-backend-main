@@ -13,13 +13,18 @@ public class JwtController {
     JwtService serviJwt;
 
     @GetMapping("/token")
-    public String getToken(@RequestParam String username){
-        return serviJwt.getToken(username);
+    public String getToken(@RequestParam String username,@RequestParam Integer id){
+        return serviJwt.getToken(username, id);
     }
 
     @GetMapping("/username")
     public String getUsernameFromToken(@RequestParam String token){
         return serviJwt.getUsernameFromToken(token);
+    }
+
+    @GetMapping("/id")
+    public String getIdFromToken(@RequestParam String token){
+        return serviJwt.getIdFromToken(token);
     }
 
     @GetMapping("/validate")

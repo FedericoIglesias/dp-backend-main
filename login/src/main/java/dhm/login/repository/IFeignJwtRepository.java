@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "jwt")
 public interface IFeignJwtRepository {
     @RequestMapping(method = RequestMethod.GET,value="/jwt/token")
-    String getToken(@RequestParam String username);
+    String getToken(@RequestParam String username,@RequestParam Integer id);
 }

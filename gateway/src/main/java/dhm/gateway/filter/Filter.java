@@ -1,7 +1,9 @@
 package dhm.gateway.filter;
 
+import dhm.gateway.repository.IFeignJwtReppsitory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,9 @@ import reactor.core.publisher.Mono;
 @Configuration
 public class Filter implements GlobalFilter{
 
+    @Autowired
+    IFeignJwtReppsitory feigJwt;
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -21,12 +26,15 @@ public class Filter implements GlobalFilter{
             throw new RuntimeException("Missing authorization header");
         }
 
-        String jwt = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
+        String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
 
+        if(!feigJwt.validateToken(token)){
+            throw new RuntimeException("Token invalidate");
+        };
 
+        String id = feigJwt.getIdFromToken(token);
 
-        System.out.println(jwt);
-
+        exchange.getRequest().getHeaders().add("id",id);
 
         return chain.filter(exchange);
     }

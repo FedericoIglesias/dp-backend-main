@@ -11,4 +11,7 @@ public interface IFeignJwtReppsitory {
 
     @RequestMapping(method = RequestMethod.GET,value = "/jwt/validate")
     Boolean validateToken(@RequestParam String token);
+
+    @RequestMapping(method = RequestMethod.GET,value="/jwt/id")
+    String getIdFromToken(@RequestParam String token);
 }

@@ -22,7 +22,6 @@ public class AccountController {
 
     @GetMapping("/{id}/transactions")
     public ResponseEntity getTransacciontUser(@PathVariable Integer id) {
-        //return new ResponseEntity(serviAccount.getListTransactionUser(id), HttpStatus.OK);
         return new ResponseEntity("serviAccount.getListTransactionUser(id)", HttpStatus.OK);
     }
     @GetMapping("/{id}/activity/{transferenceId}")
