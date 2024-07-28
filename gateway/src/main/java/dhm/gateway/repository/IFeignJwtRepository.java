@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "jwt")
-public interface IFeignJwtReppsitory {
+public interface IFeignJwtRepository {
 
     @RequestMapping(method = RequestMethod.GET,value = "/jwt/validate")
     Boolean validateToken(@RequestParam String token);
 
     @RequestMapping(method = RequestMethod.GET,value="/jwt/id")
     String getIdFromToken(@RequestParam String token);
+
 }
