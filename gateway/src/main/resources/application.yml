@@ -6,14 +6,20 @@ spring:
           uri: lb://account
           predicates:
           - Path=/api/accounts/**
+          filters:
+          - AuthenticationFilter
         - id: card
           uri: lb://card
           predicates:
             - Path=/api/cards/**
+          filters:
+            - AuthenticationFilter
         - id: transference
           uri: lb://transference
           predicates:
             - Path=/api/transference/**
+          filters:
+            - AuthenticationFilter
 
   application:
     name: gateway
