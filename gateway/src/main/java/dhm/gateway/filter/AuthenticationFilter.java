@@ -35,9 +35,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 if (!serviJwt.isTokenValid(token)){
                     throw new RuntimeException("Token expired or invalid");
                 }
-            System.out.println(serviJwt.getIdFromToken(token));
-                exchange.getRequest().getHeaders().add("id",serviJwt.getIdFromToken(token));
-
         return chain.filter(exchange);
         });
     }
