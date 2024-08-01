@@ -1,7 +1,6 @@
 version: '3.1'
 
 services:
-
   db:
     image: mysql:latest
     restart: always
@@ -14,6 +13,82 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+  eureka:
+    build: eureka/
+    mem_reservation: 512m
+    ports:
+      - 8761:8761
+  jwt:
+    build: jwt/
+    ports:
+      - 8090:8090
+  gateway:
+    build: gateway/
+    mem_reservation: 512m
+    ports:
+      - 8087:8087
+  register:
+    build: register/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - db
+    ports:
+      - 8081:8081
+  login:
+    build: login/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - db
+    ports:
+      - 8082:8082
+  logout:
+    build: logout/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - db
+    ports:
+      - 8083:8083
+  account:
+    build: account/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - db
+    ports:
+      - 8084:8084
+  card:
+    build: card/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - db
+    ports:
+      - 8085:8085
+  transference:
+    build: transference/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - db
+    ports:
+      - 8086:8086
+
+
 
 volumes:
   db_data:
