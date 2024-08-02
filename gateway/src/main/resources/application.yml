@@ -20,9 +20,13 @@ spring:
             - Path=/api/transference/**
           filters:
             - AuthenticationFilter
-
   application:
     name: gateway
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
 
 server:
   port: 8087

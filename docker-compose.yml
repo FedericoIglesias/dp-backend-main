@@ -1,6 +1,13 @@
 version: '3.1'
 
 services:
+  eureka:
+    build: eureka/
+    mem_reservation: 512m
+    ports:
+      - 8761:8761
+    networks:
+      - eureka-network
   db:
     image: mysql:latest
     restart: always
@@ -13,82 +20,116 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-  eureka:
-    build: eureka/
-    mem_reservation: 512m
-    ports:
-      - 8761:8761
+    networks:
+      - eureka-network
   jwt:
     build: jwt/
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
     ports:
       - 8090:8090
+    depends_on:
+      - eureka
+    networks:
+      - eureka-network
   gateway:
     build: gateway/
     mem_reservation: 512m
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
     ports:
       - 8087:8087
+    depends_on:
+      - eureka
+    networks:
+      - eureka-network
   register:
     build: register/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
+     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+     - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dhm
+     - SPRING_DATASOURCE_USERNAME=admin
+     - SPRING_DATASOURCE_PASSWORD=admin
     depends_on:
+      - eureka
       - db
     ports:
       - 8081:8081
+    networks:
+      - eureka-network
   login:
     build: login/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dhm
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
     depends_on:
+      - eureka
       - db
     ports:
       - 8082:8082
+    networks:
+      - eureka-network
   logout:
     build: logout/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dhm
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
     depends_on:
+      - eureka
       - db
     ports:
       - 8083:8083
+    networks:
+      - eureka-network
   account:
     build: account/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dhm
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
     depends_on:
+      - eureka
       - db
     ports:
       - 8084:8084
+    networks:
+      - eureka-network
   card:
     build: card/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dhm
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
     depends_on:
+      - eureka
       - db
     ports:
       - 8085:8085
+    networks:
+      - eureka-network
   transference:
     build: transference/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/dhm
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dhm
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
     depends_on:
+      - eureka
       - db
     ports:
       - 8086:8086
+    networks:
+      - eureka-network
 
-
+networks:
+  eureka-network:
 
 volumes:
   db_data:
