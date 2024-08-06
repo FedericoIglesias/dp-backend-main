@@ -2,7 +2,7 @@
 
 ## Description
 
-Is a server made with framework Spring that includes Hibernate, SpringData, SpringGateway, JWT & MySQL. This has some microservice that interactives between them.
+Is a server made with framework Spring that includes Hibernate, SpringData, SpringGateway, JWT & MySQL. This has some microservice that interactives between them. His function is record a profile that storages the cards that can use to pay when you want. This storages all move that make with your card
 
 ## Table of Contents
 
@@ -21,21 +21,25 @@ Is a server made with framework Spring that includes Hibernate, SpringData, Spri
 ### Steps
 
 1. **Clone the repository:**
-   ```sh
+   ```bash
    git clone https://github.com/johndoe/my-java-project.git
+   ```
 
 2. **Navigate to the project directory:**
-   ```sh
+   ```bash
    cd dp-backend-main
+   ```
    
-3. **Install dependencies:**
-    ```sh
+4. **Install dependencies:**
+    ```bash
     mvn install
+    ```
 
 ## Usage
   **Can you use run in Docker with the next command:**
-    ```sh
+    ```bash
     docker-compose up 
+    ```
 
 ## Features
     - Microservice
