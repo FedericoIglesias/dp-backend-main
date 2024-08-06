@@ -7,8 +7,6 @@ A simple Java application to demonstrate best practices in software development.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Installation
@@ -27,26 +25,22 @@ A simple Java application to demonstrate best practices in software development.
 2. **Navigate to the project directory:**
    ```sh
       cd dp-backend-main
+   
 3. **Install dependencies:**
     ```sh
-      mvn install
-
-
+       mvn install
 
 ## Usage
   **Can you use run in Docker with the next command:**
     ```sh
-      docker compose up -d
+    docker compose up -d
 
 ## Features
-
     - Microservice
     - RestApi
     - Gateway
     - Input Validation
     - Data persistence with Hibernete
-
-
 
 ## Contact
   + Email: igl.fede@gmail.com
