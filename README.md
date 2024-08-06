@@ -1,6 +1,8 @@
 # Server Java
 
-A simple Java application to demonstrate best practices in software development.
+## Description
+
+Is a server made with framework Spring that includes Hibernate, SpringData, SpringGateway, JWT & MySQL. This has some microservice that interactives between them.
 
 ## Table of Contents
 
@@ -24,23 +26,23 @@ A simple Java application to demonstrate best practices in software development.
 
 2. **Navigate to the project directory:**
    ```sh
-      cd dp-backend-main
+   cd dp-backend-main
    
 3. **Install dependencies:**
     ```sh
-       mvn install
+    mvn install
 
 ## Usage
   **Can you use run in Docker with the next command:**
     ```sh
-    docker compose up -d
+    docker-compose up 
 
 ## Features
     - Microservice
     - RestApi
     - Gateway
     - Input Validation
-    - Data persistence with Hibernete
+    - Spring
 
 ## Contact
   + Email: igl.fede@gmail.com
