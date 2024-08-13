@@ -19,7 +19,7 @@ public class RegisterApplication {
         .info(new Info()
             .title("DHM Api Register")
             .version("0.1")
-            .description("Endpoints  of api register")
+            .description("Endpoints of api register")
         );
   }
 
