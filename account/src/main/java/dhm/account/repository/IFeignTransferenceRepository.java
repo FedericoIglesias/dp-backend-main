@@ -13,6 +13,6 @@ import java.util.List;
 @FeignClient(name = "transference")
 public interface IFeignTransferenceRepository {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/transference")
     List<Transference> getTransaction(@RequestParam Integer idAccount);
 }
