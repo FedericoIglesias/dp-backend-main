@@ -1,23 +1,26 @@
 package dhm.register;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class RegisterApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RegisterApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(RegisterApplication.class, args);
+  }
+
+  @Bean
+  public OpenAPI customOpenApi() {
+    return new OpenAPI()
+        .info(new Info()
+            .title("DHM Api Register")
+            .version("0.1")
+            .description("Endpoints  of api register")
+        );
+  }
 
 }
-/*
-<dependency>
-<groupId>org.springframework.security</groupId>
-<artifactId>spring-security-test</artifactId>
-<scope>test</scope>
-</dependency>
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-security</artifactId>
-</dependency>*/
