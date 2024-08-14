@@ -3,6 +3,11 @@ package dhm.card.controller;
 import dhm.card.model.Cards;
 import dhm.card.model.Transference;
 import dhm.card.service.CardsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +27,23 @@ public class CardsController {
         return new ResponseEntity<>("STATUS UP",HttpStatus.OK);
     }
 
+    @Operation(summary = "Card", description = "Get a card list")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Success to owned card list",
+            content = @Content(
+                schema = @Schema(implementation = Cards.class))),
+    })
     @GetMapping
     public ResponseEntity getListCards(){
         return new ResponseEntity(serviCards.getListCards(),HttpStatus.OK);
     }
 
+    @Operation(summary = "Card", description = "Get a card")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Success get a card",
+            content = @Content(
+                schema = @Schema(implementation = Cards.class))),
+    })
     @GetMapping("/{id}")
     public ResponseEntity getCard(@PathVariable Integer id){
         Cards card = serviCards.getCard(id);
@@ -34,12 +51,21 @@ public class CardsController {
         return new ResponseEntity(card,HttpStatus.OK);
     }
 
+    @Operation(summary = "Card", description = "Delete a card")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Success delete a card")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity deleteCard(@PathVariable Integer id){
         serviCards.deleteCard(id);
-        return new ResponseEntity<>("Succes to delete card", HttpStatus.OK);
+        return new ResponseEntity<>("Success to delete card", HttpStatus.OK);
     }
 
+    @Operation(summary = "Card", description = "Create a card")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Success to save a card"),
+        @ApiResponse(responseCode = "409", description = "Fail to save card")
+    })
     @PostMapping
     public ResponseEntity saveCard(@RequestBody Cards card){
         Integer res = serviCards.saveCards(card);
@@ -49,12 +75,23 @@ public class CardsController {
         return new ResponseEntity("Success to save Card",HttpStatus.CREATED);
     }
 
+
+    @Operation(summary = "Card", description = "Modify a card")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Success to modify a card")
+    })
     @PutMapping("/{id}")
     public ResponseEntity modifyCard(@PathVariable Integer id, @RequestBody Cards card){
         serviCards.modifyCard(id,card);
         return new ResponseEntity("Success to modify card",HttpStatus.OK);
     }
 
+    @Operation(summary = "Card", description = "Get a card list")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Success get a card",
+            content = @Content(
+                schema = @Schema(implementation = Cards.class))),
+    })
     @GetMapping("/account")
     public List<Cards> getUsersCards(@RequestParam Integer idUser){
         List<Cards> listCards = serviCards.getUserCards(idUser);
@@ -63,17 +100,32 @@ public class CardsController {
                 }
         return listCards;
     }
+    @Operation(summary = "Card", description = "Save a card")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "save get a card",
+            content = @Content(
+                schema = @Schema(implementation = Cards.class))),
+    })
     @PostMapping("/save")
     public Integer saveCardFromAccount(@RequestBody Cards card){
         return serviCards.saveCards(card);
     }
 
+
+    @Operation(summary = "Card", description = "Delete a card")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Delete a  card")})
     @DeleteMapping("/delete")
     public Integer deleteCardFromAccount(@RequestParam Integer id){
         System.out.println("into the delete");
         return serviCards.deleteCardFromAccount(id);
     }
 
+    @Operation(summary = "Card", description = "Save transference ")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Success to save a transference"),
+        @ApiResponse(responseCode = "406", description = "Fail to save transference")
+    })
     @PostMapping("/accounts/{id}/transferences")
     public ResponseEntity saveTransference(@RequestBody Transference transference){
         Integer res = serviCards.saveTransference(transference);
