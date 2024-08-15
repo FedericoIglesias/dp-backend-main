@@ -2,7 +2,7 @@
 
 ## Description
 
-Is a server made with framework Spring that includes Hibernate, SpringData, SpringGateway, JWT & MySQL. This has some microservice that interactives between them. His function is record a profile that storages the cards that can use to pay when you want. This storages all move that make with your card
+This is a server made with framework Spring that includes Hibernate, SpringData, SpringGateway, JWT & MySQL. This has some microservice that interactives between them. His function is record a profile that storages the cards that can use to pay when you want. This storages all move that make with your card
 
 ## Table of Contents
 
