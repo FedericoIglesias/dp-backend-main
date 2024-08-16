@@ -1,0 +1,11 @@
+{
+  "register": {
+    "post": {
+      "request": {
+      },
+      "response": {
+        "id": ""
+      }
+    }
+  }
+}
