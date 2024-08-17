@@ -2,9 +2,20 @@
   "register": {
     "post": {
       "request": {
+        "name": "string",
+        "lastname": "string",
+        "email": "string", // example@mail.com
+        "phone": "string",
+        "password": "string"
       },
       "response": {
-        "id": ""
+        "id": "string",
+        "name": "string",
+        "lastname": "string",
+        "email": "string",
+        "phone": "string",
+        "alias": "string",
+        "cvu": "string"
       }
     }
   }
