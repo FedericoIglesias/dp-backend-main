@@ -4,7 +4,8 @@
       "request": {
         "name": "string",
         "lastname": "string",
-        "email": "string", // example@mail.com
+        "email": "string",
+        // example@mail.com
         "phone": "string",
         "password": "string"
       },
@@ -16,6 +17,28 @@
         "phone": "string",
         "alias": "string",
         "cvu": "string"
+      }
+    }
+  },
+  "login": {
+    "request": {
+      "post": {
+        "email": "string",
+        // example@mail.com
+        "password": "string"
+      },
+      "response": {
+        "jwt": "string"
+      }
+    }
+  },
+  "logout": {
+    "post": {
+      "request": {
+        "jwt": "string"
+      },
+      "response": {
+        "msg": "string"
       }
     }
   }
