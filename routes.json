@@ -41,5 +41,27 @@
         "msg": "string"
       }
     }
+  },
+  "accounts": {
+    "get": {
+      "request": {
+        "/id(user)": "string",
+        "/id(user)/tranactions": "string"
+      },
+      "response": {
+        "/id(user)": {
+          "id": "integer",
+          "balance": "float",
+          "cvu": "string",
+          "alias": "string",
+          "name": "string"
+        },
+        "/id(user)/transactions": {
+          "id": "integer",
+          "date": "string",
+          "value": "float"
+        }
+      }
+    }
   }
 }
