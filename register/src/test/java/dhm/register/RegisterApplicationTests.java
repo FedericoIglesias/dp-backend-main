@@ -67,5 +67,13 @@ class RegisterApplicationTests {
 				.body("alias", matchesPattern(aliasPattern))
 				.body("money", equalTo(0.0F))
 				.body("phone", equalTo("610107918"));
+
+		given()
+				.header("Content-Type", "application/json")
+				.body(requestBody)
+				.when()
+				.post("/user")
+				.then()
+				.statusCode(500);
 	}
 }
