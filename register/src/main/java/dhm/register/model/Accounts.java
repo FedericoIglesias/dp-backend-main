@@ -24,12 +24,10 @@ public class Accounts {
     String lastname;
     String phone;
     @Column(nullable = false)
-    Double amount = 00.00;
+    Double money = 00.00;
     @Column(nullable = false,unique = true)
     String alias;
     @Column(nullable = false,unique = true)
     String cvu;
     String token;
-//  @Enumerated(EnumType.STRING)
-//  Role role = Role.USER;
 }

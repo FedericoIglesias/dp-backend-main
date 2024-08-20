@@ -16,4 +16,5 @@ public class UsersResponse {
     String phone;
     String alias;
     String cvu;
+    Double money;
 }

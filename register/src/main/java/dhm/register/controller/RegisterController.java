@@ -51,7 +51,7 @@ public class RegisterController {
         .username(request.getEmail())
         .lastname(request.getLastname())
         .password(request.getPassword())
-        .amount(0.0)
+        .money(0.0)
         .build();
     UsersResponse resUser = serviAccount.registerUser(user);
     return new ResponseEntity<>(resUser, HttpStatus.CREATED);

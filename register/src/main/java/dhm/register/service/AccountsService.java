@@ -17,45 +17,47 @@ import java.util.Random;
 
 @Service
 public class AccountsService {
-    @Autowired
-    IAccountsRepository repoUsers;
+  @Autowired
+  IAccountsRepository repoUsers;
 
-    public UsersResponse registerUser(Accounts user){
-        user.setAlias(createAlias());
-        user.setCvu(createCVU());
-        user.setPassword(passwordEncoder().encode(user.getPassword()));
-        repoUsers.save(user);
-        Accounts userResponse = repoUsers.findByUsername(user.getUsername());
-        return UsersResponse.builder()
-                .name(userResponse.getName())
-                .lastname(userResponse.getLastname())
-                .phone(userResponse.getPhone())
-                .email(userResponse.getUsername())
-                .cvu(userResponse.getCvu())
-                .alias(userResponse.getAlias())
-                .build();
-    }
+  public UsersResponse registerUser(Accounts user) {
+    user.setAlias(createAlias());
+    user.setCvu(createCVU());
+    user.setPassword(passwordEncoder().encode(user.getPassword()));
+    user.setMoney(0.0);
+    repoUsers.save(user);
+    Accounts userResponse = repoUsers.findByUsername(user.getUsername());
+    return UsersResponse.builder()
+        .name(userResponse.getName())
+        .lastname(userResponse.getLastname())
+        .phone(userResponse.getPhone())
+        .email(userResponse.getUsername())
+        .cvu(userResponse.getCvu())
+        .alias(userResponse.getAlias())
+        .money(userResponse.getMoney())
+        .build();
+  }
 
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    public String createCVU(){
-        String cvu = new BigInteger(73,new Random()).toString();
-        return cvu;
-    }
+  public String createCVU() {
+    String cvu = new BigInteger(73, new Random()).toString();
+    return cvu;
+  }
 
-    public String createAlias(){
-        String alias = "";
-        String filePath = "C:\\Users\\Portatil\\Desktop\\myFolder\\myProject\\digitalMoneyHouse\\dp-backend-main\\register\\src\\main\\java\\dhm\\register\\service\\alias.txt";
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(filePath));
-            alias = alias + lines.get(new Random().nextInt(100)) + ".";
-            alias = alias + lines.get(new Random().nextInt(100)) + ".";
-            alias = alias + lines.get(new Random().nextInt(100));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return alias;
+  public String createAlias() {
+    String alias = "";
+    String filePath = "C:\\Users\\Portatil\\Desktop\\myFolder\\myProject\\digitalMoneyHouse\\dp-backend-main\\register\\src\\main\\java\\dhm\\register\\service\\alias.txt";
+    try {
+      List<String> lines = Files.readAllLines(Paths.get(filePath));
+      alias = alias + lines.get(new Random().nextInt(100)) + ".";
+      alias = alias + lines.get(new Random().nextInt(100)) + ".";
+      alias = alias + lines.get(new Random().nextInt(100));
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return alias;
+  }
 }

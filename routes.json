@@ -45,21 +45,54 @@
   "accounts": {
     "get": {
       "request": {
-        "/id(user)": "string",
-        "/id(user)/tranactions": "string"
+        "/{idUser}": "string",
+        "/{idUser}/tranactions": "string",
+        "/users/{idUser}": "string"
       },
       "response": {
-        "/id(user)": {
+        "/{idUser}": {
           "id": "integer",
           "balance": "float",
           "cvu": "string",
           "alias": "string",
           "name": "string"
         },
-        "/id(user)/transactions": {
+        "/{idUser}/transactions": {
           "id": "integer",
           "date": "string",
           "value": "float"
+        }
+      }
+    },
+    "put": {
+      "request": {
+        "/{idUser}": {
+          "userId": "string",
+          "balance": "integer",
+          "cvu": "string",
+          "alias": "string",
+          "name": "string"
+        },
+        "/users/{idUser}": {
+          "email": "string",
+          "firstName": "string",
+          "lastName": "string",
+          "phone": "string"
+        }
+      },
+      "response": {
+        "/{idUser}": {
+          "userId": "string",
+          "balance": "integer",
+          "cvu": "string",
+          "alias": "string",
+          "name": "string"
+        },
+        "/users/{idUser}": {
+          "email": "string",
+          "firstName": "string",
+          "lastName": "string",
+          "phone": "string"
         }
       }
     }
