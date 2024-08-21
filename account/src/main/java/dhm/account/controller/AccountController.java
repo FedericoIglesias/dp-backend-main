@@ -43,13 +43,13 @@ public class AccountController {
     @ApiResponse(responseCode = "401", description = "User Unauthorized")
   })
   // /*ServerWebExchange exchange,*/ , HttpHeaders headers
-  @GetMapping("/{idUser}/transactions")
-  public ResponseEntity getTransacciontUser(@PathVariable String idUser, HttpServletRequest httpServletRequest) {
+  @GetMapping("/{idAccount}/transactions")
+  public ResponseEntity getTransacciontUser(@PathVariable String idAccount, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idUser)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
-    return new ResponseEntity(serviAccount.getListTransactionUser(Integer.valueOf(idUser)), HttpStatus.OK);
+    return new ResponseEntity(serviAccount.getListTransactionUser(Integer.valueOf(idAccount)), HttpStatus.OK);
   }
 
   @Operation(summary = "Account", description = "This endpoint Account")
@@ -59,10 +59,11 @@ public class AccountController {
         schema = @Schema(implementation = Transference.class))),
     @ApiResponse(responseCode = "403", description = "User Unauthorized")
   })
-  @GetMapping("/{id}/activity/{transferenceId}")
-  public ResponseEntity getTransferenceUser(@PathVariable Integer id, @PathVariable Integer transferenceId, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @GetMapping("/{idAccount}/activity/{transferenceId}")
+  public ResponseEntity getTransferenceUser(@PathVariable Integer idAccount, @PathVariable Integer transferenceId, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    System.out.println(token);
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity("You transference is: " + transferenceId, HttpStatus.OK);
@@ -75,10 +76,10 @@ public class AccountController {
         schema = @Schema(implementation = Transference.class))),
     @ApiResponse(responseCode = "403", description = "User Unauthorized")
   })
-  @GetMapping("/{id}/activity")
-  public ResponseEntity getActivityUser(@PathVariable Integer id, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @GetMapping("/{idAccount}/activity")
+  public ResponseEntity getActivityUser(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity("Your activity", HttpStatus.OK);
@@ -91,13 +92,13 @@ public class AccountController {
         schema = @Schema(implementation = Transference.class))),
     @ApiResponse(responseCode = "403", description = "User Unauthorized")
   })
-  @GetMapping("/balance/{id}")
-  public ResponseEntity getAmount(@PathVariable Integer id, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @GetMapping("/balance/{idAccount}")
+  public ResponseEntity getAmount(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
-    return new ResponseEntity<>(serviAccount.getAmount(id), HttpStatus.OK);
+    return new ResponseEntity<>(serviAccount.getAmount(idAccount), HttpStatus.OK);
   }
 
   @Operation(summary = "Account", description = "This endpoint Account")
@@ -107,13 +108,13 @@ public class AccountController {
         schema = @Schema(implementation = Transference.class))),
     @ApiResponse(responseCode = "403", description = "User Unauthorized")
   })
-  @GetMapping("/{id}")
-  public ResponseEntity getInfo(@PathVariable Integer id, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @GetMapping("/{idAccount}")
+  public ResponseEntity getInfo(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
-    return new ResponseEntity(serviAccount.getAccount(id), HttpStatus.OK);
+    return new ResponseEntity(serviAccount.getAccount(idAccount), HttpStatus.OK);
   }
 
   @Operation(summary = "Account", description = "This endpoint Account")
@@ -123,13 +124,13 @@ public class AccountController {
         schema = @Schema(implementation = Accounts.class))),
     @ApiResponse(responseCode = "403", description = "User Unauthorized")
   })
-  @PutMapping("/{id}")
-  public ResponseEntity modifyInfo(@PathVariable Integer id, @RequestBody Accounts account, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @PutMapping("/{idAccount}")
+  public ResponseEntity modifyInfo(@PathVariable Integer idAccount, @RequestBody Accounts account, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
-    return new ResponseEntity<>(serviAccount.modifyAccount(id, account), HttpStatus.ACCEPTED);
+    return new ResponseEntity<>(serviAccount.modifyAccount(idAccount, account), HttpStatus.ACCEPTED);
   }
 
   @Operation(summary = "Account", description = "This endpoint Account")
@@ -139,13 +140,13 @@ public class AccountController {
         schema = @Schema(implementation = Cards.class))),
     @ApiResponse(responseCode = "403", description = "User Unauthorized")
   })
-  @GetMapping("/{id}/cards")
-  public ResponseEntity getListCardsAccounts(@PathVariable Integer id, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @GetMapping("/{idAccount}/cards")
+  public ResponseEntity getListCardsAccounts(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
-    return new ResponseEntity<>(serviAccount.getCardsAccount(id), HttpStatus.OK);
+    return new ResponseEntity<>(serviAccount.getCardsAccount(idAccount), HttpStatus.OK);
   }
 
   @Operation(summary = "Account", description = "This endpoint Account")
@@ -155,10 +156,10 @@ public class AccountController {
         schema = @Schema(implementation = Cards.class))),
     @ApiResponse(responseCode = "403", description = "User Unauthorized")
   })
-  @GetMapping("/{id}/cards/{idCard}")
-  public ResponseEntity getListCardsAccounts(@PathVariable Integer id, @PathVariable Integer idCard, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @GetMapping("/{idAccount}/cards/{idCard}")
+  public ResponseEntity getListCardsAccounts(@PathVariable Integer idAccount, @PathVariable Integer idCard, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity<>(serviAccount.getCard(idCard), HttpStatus.OK);
@@ -170,10 +171,10 @@ public class AccountController {
     @ApiResponse(responseCode = "403", description = "User Unauthorized"),
     @ApiResponse(responseCode = "409", description = "Conflict to save a card")
   })
-  @PostMapping("/{id}/cards")
-  public ResponseEntity saveCard(@PathVariable Integer id, @RequestBody Cards card, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @PostMapping("/{idAccount}/cards")
+  public ResponseEntity saveCard(@PathVariable Integer idAccount, @RequestBody Cards card, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     Integer res = serviAccount.saveCard(card);
@@ -190,10 +191,10 @@ public class AccountController {
     @ApiResponse(responseCode = "404", description = "User Unauthorized"),
     @ApiResponse(responseCode = "409", description = "Conflict to save a card")
   })
-  @DeleteMapping("/{id}/cards/{idCard}")
-  public ResponseEntity deleteCard(@PathVariable Integer id, @PathVariable Integer idCard, ServerWebExchange exchange) {
-    String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0).substring(7);
-    if (!serviJwt.getIdFromToken(token).equals(id)) {
+  @DeleteMapping("/{idAccount}/cards/{idCard}")
+  public ResponseEntity deleteCard(@PathVariable Integer idAccount, @PathVariable Integer idCard, HttpServletRequest httpServletRequest) {
+    String token = httpServletRequest.getHeader("AUTHORIZATION");
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     Integer res = serviAccount.deleteCard(idCard);
