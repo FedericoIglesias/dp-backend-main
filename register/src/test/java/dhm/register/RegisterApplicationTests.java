@@ -20,7 +20,7 @@ class RegisterApplicationTests {
 		RestAssured.baseURI = "http://localhost:8081/api/register";
 
 		given()
-				.header("Conten-Type","application/json")
+				.header("Content-Type","application/json")
 				.when()
 				.get("/status")
 				.then()

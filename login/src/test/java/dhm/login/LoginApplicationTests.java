@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 
 @SpringBootTest
 class LoginApplicationTests {
