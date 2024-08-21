@@ -31,8 +31,8 @@ public class TransferenceController {
                 schema = @Schema(implementation = Transference.class))),
     })
     @GetMapping
-    public Transference getTransaction(@RequestParam Integer id) {
-        return serviTransaction.getTransaction(id);
+    public Transference getTransaction(@RequestParam Integer idAccount) {
+        return serviTransaction.getTransaction(idAccount);
     }
 
     @Operation(summary = "Trasnference", description = "This endpoint create transference")
