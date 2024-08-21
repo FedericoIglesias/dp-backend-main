@@ -55,4 +55,27 @@ class AccountApplicationTests {
       .statusCode(401);
   }
 
+  @Test
+  void activity(){
+    RestAssured.baseURI = "http://localhost:8084/api/accounts";
+    String idAccount = "102";
+
+    // Is a token invented
+    String bearerToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRyb0BnbWFpbC5jb20iLCJqdGkiOiIxMDIiLCJpYXQiOjE3MjQyNDcxNjgsImV4cCI6MjcyNDI0ODYwOH0.1JTExZFSFVhNcX-J_Zgx6_EE_dYndORs4BcKbENNCUA";
+
+
+    given()
+      .header("AUTHORIZATION", bearerToken)
+      .when()
+      .get("/" + idAccount + "/activity")
+      .then()
+      .statusCode(200);
+    given()
+      .when()
+      .get("/" + idAccount + "/activity")
+      .then()
+      .statusCode(401);
+  }
+
+
 }

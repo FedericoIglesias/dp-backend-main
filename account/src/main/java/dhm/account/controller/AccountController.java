@@ -44,12 +44,12 @@ public class AccountController {
   })
   // /*ServerWebExchange exchange,*/ , HttpHeaders headers
   @GetMapping("/{idAccount}/transactions")
-  public ResponseEntity getTransacciontUser(@PathVariable String idAccount, HttpServletRequest httpServletRequest) {
+  public ResponseEntity getTransacciontUser(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
-    return new ResponseEntity(serviAccount.getListTransactionUser(Integer.valueOf(idAccount)), HttpStatus.OK);
+    return new ResponseEntity(serviAccount.getListTransactionUser(idAccount), HttpStatus.OK);
   }
 
   @Operation(summary = "Account", description = "This endpoint Account")
@@ -79,7 +79,7 @@ public class AccountController {
   @GetMapping("/{idAccount}/activity")
   public ResponseEntity getActivityUser(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity("Your activity", HttpStatus.OK);
@@ -95,7 +95,7 @@ public class AccountController {
   @GetMapping("/balance/{idAccount}")
   public ResponseEntity getAmount(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity<>(serviAccount.getAmount(idAccount), HttpStatus.OK);
@@ -111,7 +111,7 @@ public class AccountController {
   @GetMapping("/{idAccount}")
   public ResponseEntity getInfo(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity(serviAccount.getAccount(idAccount), HttpStatus.OK);
@@ -127,7 +127,7 @@ public class AccountController {
   @PutMapping("/{idAccount}")
   public ResponseEntity modifyInfo(@PathVariable Integer idAccount, @RequestBody Accounts account, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity<>(serviAccount.modifyAccount(idAccount, account), HttpStatus.ACCEPTED);
@@ -143,7 +143,7 @@ public class AccountController {
   @GetMapping("/{idAccount}/cards")
   public ResponseEntity getListCardsAccounts(@PathVariable Integer idAccount, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity<>(serviAccount.getCardsAccount(idAccount), HttpStatus.OK);
@@ -159,7 +159,7 @@ public class AccountController {
   @GetMapping("/{idAccount}/cards/{idCard}")
   public ResponseEntity getListCardsAccounts(@PathVariable Integer idAccount, @PathVariable Integer idCard, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     return new ResponseEntity<>(serviAccount.getCard(idCard), HttpStatus.OK);
@@ -174,7 +174,7 @@ public class AccountController {
   @PostMapping("/{idAccount}/cards")
   public ResponseEntity saveCard(@PathVariable Integer idAccount, @RequestBody Cards card, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     Integer res = serviAccount.saveCard(card);
@@ -194,7 +194,7 @@ public class AccountController {
   @DeleteMapping("/{idAccount}/cards/{idCard}")
   public ResponseEntity deleteCard(@PathVariable Integer idAccount, @PathVariable Integer idCard, HttpServletRequest httpServletRequest) {
     String token = httpServletRequest.getHeader("AUTHORIZATION");
-    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount)) {
+    if (token == null || !serviJwt.getIdFromToken(token.substring(7)).equals(idAccount.toString())) {
       return new ResponseEntity<>("User Unauthorized", HttpStatus.UNAUTHORIZED);
     }
     Integer res = serviAccount.deleteCard(idCard);
