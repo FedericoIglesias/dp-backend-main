@@ -44,9 +44,9 @@ public class CardsController {
             content = @Content(
                 schema = @Schema(implementation = Cards.class))),
     })
-    @GetMapping("/{id}")
-    public ResponseEntity getCard(@PathVariable Integer id){
-        Cards card = serviCards.getCard(id);
+    @GetMapping("/{numberCard}")
+    public ResponseEntity getCard(@PathVariable Integer numberCard){
+        Cards card = serviCards.getCardByNumber(numberCard);
         card.setAccount(null);
         return new ResponseEntity(card,HttpStatus.OK);
     }
@@ -55,9 +55,9 @@ public class CardsController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Success delete a card")
     })
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteCard(@PathVariable Integer id){
-        serviCards.deleteCard(id);
+    @DeleteMapping("/{numberCard}")
+    public ResponseEntity deleteCard(@PathVariable Integer numberCard){
+        serviCards.deleteCard(numberCard);
         return new ResponseEntity<>("Success to delete card", HttpStatus.OK);
     }
 
@@ -80,9 +80,9 @@ public class CardsController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Success to modify a card")
     })
-    @PutMapping("/{id}")
-    public ResponseEntity modifyCard(@PathVariable Integer id, @RequestBody Cards card){
-        serviCards.modifyCard(id,card);
+    @PutMapping("/{numberCard}")
+    public ResponseEntity modifyCard(@PathVariable Integer numberCard, @RequestBody Cards card){
+        serviCards.modifyCard(numberCard,card);
         return new ResponseEntity("Success to modify card",HttpStatus.OK);
     }
 
@@ -100,17 +100,6 @@ public class CardsController {
                 }
         return listCards;
     }
-    @Operation(summary = "Card", description = "Save a card")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "save get a card",
-            content = @Content(
-                schema = @Schema(implementation = Cards.class))),
-    })
-    @PostMapping("/save")
-    public Integer saveCardFromAccount(@RequestBody Cards card){
-        return serviCards.saveCards(card);
-    }
-
 
     @Operation(summary = "Card", description = "Delete a card")
     @ApiResponses(value = {
@@ -126,7 +115,7 @@ public class CardsController {
         @ApiResponse(responseCode = "201", description = "Success to save a transference"),
         @ApiResponse(responseCode = "406", description = "Fail to save transference")
     })
-    @PostMapping("/accounts/{id}/transferences")
+    @PostMapping("/accounts/{idAccount}/transferences")
     public ResponseEntity saveTransference(@RequestBody Transference transference){
         Integer res = serviCards.saveTransference(transference);
         if(res == 0){

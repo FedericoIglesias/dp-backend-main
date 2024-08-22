@@ -25,6 +25,10 @@ public class CardsService {
         return repoCards.findById(id).orElse(null);
     }
 
+    public Cards getCardByNumber(Integer number){
+        return repoCards.findByNumber(number);
+    }
+
     public Integer saveCards(Cards card) {
         Cards res = repoCards.findByNumber(card.getNumber());
         if (res == null) {
@@ -35,12 +39,13 @@ public class CardsService {
 
     }
 
-    public void deleteCard(Integer id) {
+    public void deleteCard(Integer numberCard) {
+        Integer id = repoCards.findByNumber(numberCard).getId();
         repoCards.deleteById(id);
     }
 
-    public String modifyCard(Integer id, Cards card) {
-        Cards oldCard = getCard(id);
+    public String modifyCard(Integer number, Cards card) {
+        Cards oldCard = getCardByNumber(number);
         if (oldCard == null) {
             return "Unsuccessful to find card";
         }
