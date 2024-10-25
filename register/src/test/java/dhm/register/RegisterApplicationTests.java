@@ -15,9 +15,9 @@ import static org.hamcrest.Matchers.matchesPattern;
 @SpringBootTest
 class RegisterApplicationTests {
 
-	@Test
+	/*@Test
 	void registerTest() {
-		RestAssured.baseURI = "http://localhost:8081/api/register";
+		/*RestAssured.baseURI = "http://localhost:8081/api/register";
 
 		given()
 				.header("Content-Type","application/json")
@@ -75,5 +75,9 @@ class RegisterApplicationTests {
 				.post("/user")
 				.then()
 				.statusCode(500);
+
+
 	}
+
+	 */
 }

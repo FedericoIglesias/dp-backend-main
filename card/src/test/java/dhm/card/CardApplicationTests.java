@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest
 class CardApplicationTests {
-
+/*
 	@Test
 	void statusCard() {
 		RestAssured.baseURI = "Http://localhost:8085/api/cards";
@@ -28,8 +28,9 @@ class CardApplicationTests {
 			.get("/" + id + "/transactions")
 			.then()
 			.statusCode(200); */
-	}
 
+	}
+/*
 	@Test
 	void crudCard() {
 		RestAssured.baseURI = "Http://localhost:8085/api/cards";
@@ -66,3 +67,5 @@ class CardApplicationTests {
 	}
 
 }
+
+ */

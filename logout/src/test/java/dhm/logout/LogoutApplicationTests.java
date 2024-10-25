@@ -10,9 +10,9 @@ import static io.restassured.RestAssured.given;
 @SpringBootTest
 class LogoutApplicationTests {
 
-	@Test
+/*	@Test
 	void logoutTest() {
 
 	}
-
+*/
 }

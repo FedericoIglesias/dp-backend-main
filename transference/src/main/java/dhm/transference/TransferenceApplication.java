@@ -13,13 +13,13 @@ public class TransferenceApplication {
 		SpringApplication.run(TransferenceApplication.class, args);
 	}
 
-	@Bean
-	public OpenAPI customOpenApi() {
-		return new OpenAPI()
-				.info(new Info()
-						.title("DHM Api Register")
-						.version("0.1")
-						.description("Endpoints of api register")
-				);
-	}
+//	@Bean
+//	public OpenAPI customOpenApi() {
+//		return new OpenAPI()
+//				.info(new Info()
+//						.title("DHM Api Register")
+//						.version("0.1")
+//						.description("Endpoints of api register")
+//				);
+//	}
 }
