@@ -10,6 +10,7 @@ public class JwtService {
     IFeignJwtRepository feignJwt;
 
     public String getIdFromToken(String token){
-        return feignJwt.getIdFromToken(token);
+            return feignJwt.getIdFromToken(token);
+
     }
 }

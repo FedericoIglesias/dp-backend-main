@@ -42,7 +42,12 @@ public class JwtController {
   })
   @GetMapping("/id")
   public String getIdFromToken(@RequestParam String token) {
-    return serviJwt.getIdFromToken(token);
+    if(serviJwt.isTokenExpired(token)){
+      return  null;
+    }
+      return serviJwt.getIdFromToken(token);
+
+
   }
 
   @Operation(summary = "JWT", description = "This endpoint jwt")

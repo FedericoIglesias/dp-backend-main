@@ -3,7 +3,7 @@ package dhm.register.controller;
 import dhm.register.dto.UsersResponse;
 import dhm.register.model.RequestUsers;
 import dhm.register.model.Accounts;
-import dhm.register.service.AccountsService;
+import dhm.register.service.RegisterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 public class RegisterController {
 
   @Autowired
-  AccountsService serviAccount;
+  RegisterService serviAccount;
 
   @GetMapping("/status")
   public ResponseEntity<String> status() {

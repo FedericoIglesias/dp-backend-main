@@ -22,7 +22,7 @@ public class LoginService {
 
     public LoginResponseDTO login(LoginRequestDTO requestDTO){
         Accounts user = repoLogin.findByUsername(requestDTO.getEmail());
-        if(passwordEncoder().matches(requestDTO.getPassword(), user.getPassword())){
+        if(user != null && passwordEncoder().matches(requestDTO.getPassword(), user.getPassword())){
             String token = feignJwt.getToken(user.getUsername(), user.getId());
             user.setToken(token);
             repoLogin.save(user);

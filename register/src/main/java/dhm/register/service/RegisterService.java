@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class AccountsService {
+public class RegisterService {
   @Autowired
   IAccountsRepository repoUsers;
 
